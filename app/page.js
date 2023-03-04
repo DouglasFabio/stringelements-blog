@@ -16,13 +16,13 @@ export default function PrimeiroAcessoADM() {
 
   const enviaDadosADM = async e =>{
     e.preventDefault(); //nao limpar o console após o submit
-    console.log(dadosADM.nomeADM+dadosADM.emailADM);
+    console.log(dadosADM.nomeADM+dadosADM.emailADM+dadosADM.senhaADM);
   }
 
   return (
     <Stack gap={2} className="col-md-5 mx-auto" >
       <p></p>
-      <Alert variant="secondary"><Alert.Heading>Bem-vindo! Cadastre um administrador do sistema:</Alert.Heading></Alert>
+      <Alert variant="secondary"><Alert.Heading>Bem-vindo{'(a)'}! Cadastre um administrador do sistema:</Alert.Heading></Alert>
       <form onSubmit={enviaDadosADM}>
         <div className="form-floating">
           <input type="text" className="form-control" id="nome"

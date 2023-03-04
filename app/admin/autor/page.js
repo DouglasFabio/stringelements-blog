@@ -13,7 +13,7 @@ export default function CadastroAutor() {
     emailAutor: '',
     apelidoAutor: '',
     dataNascimentoAutor: '',
-    senhaAutor: 'GERA-SENHA-ALEATORIA'
+    senhaAutor: 'GERA-SENHA-ALEATORIA - INSERIR API auto'
   });
 
   const handleChange = e => setDadosAutor({...dadosAutor, [e.target.name]: e.target.value});
