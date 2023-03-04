@@ -22,7 +22,7 @@ export default function PrimeiroAcessoADM() {
   return (
     <Stack gap={2} className="col-md-5 mx-auto" >
       <p></p>
-      <Alert variant="secondary"><Alert.Heading>Bem-vindo{'(a)'}! Cadastre um administrador do sistema:</Alert.Heading></Alert>
+      <Alert variant="secondary"><Alert.Heading>Bem-vindo{'(a)'}! Por favor, cadastre um administrador do sistema:</Alert.Heading></Alert>
       <form onSubmit={enviaDadosADM}>
         <div className="form-floating">
           <input type="text" className="form-control" id="nome"
