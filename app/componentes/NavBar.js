@@ -21,7 +21,7 @@ export default function NavBar(props) {
                                     Inicio
                                 </Nav.Link>
                             </Link>
-                            <NavDropdown title="Área VIP">
+                            <NavDropdown title="Leitor VIP">
                                 <Link href="/leitores" passHref legacyBehavior>
                                     <NavDropdown.Item>Cadastre-se</NavDropdown.Item>
                                 </Link>
@@ -74,9 +74,9 @@ export default function NavBar(props) {
                                     <NavDropdown.Item>Autor</NavDropdown.Item>
                                 </Link>
                             </NavDropdown>
-                            <NavDropdown title="CADASTRE-SE">
+                            <NavDropdown title="Gerenciamento">
                                 <Link href="/" passHref legacyBehavior>
-                                    <NavDropdown.Item>Seja um leitor VIP</NavDropdown.Item>
+                                    <NavDropdown.Item>Listar Usuários</NavDropdown.Item>
                                 </Link>
                             </NavDropdown>
                         </Nav>
