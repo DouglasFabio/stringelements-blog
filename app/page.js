@@ -1,5 +1,6 @@
 'use client'
 import { Badge, Stack } from "react-bootstrap";
+import DataAtual from "./componentes/DataAtual";
 
 export default function Noticias(){
     return(
@@ -7,7 +8,7 @@ export default function Noticias(){
             <p></p> 
             <div className="container-md">
                 <hr/>
-                <h3><p className="text-bold">04/03/2023</p>Título Notícia <Badge bg="secondary">New</Badge></h3>
+                <h3><p className="text-bold"><DataAtual/></p>Título Notícia <Badge bg="secondary">New</Badge></h3>
                 <h5>Subtítulo Noticia</h5>
                 <p>
                     It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.

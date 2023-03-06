@@ -83,7 +83,87 @@ export default function NavBar(props) {
                         <Nav>
                             <Link href="/" passHref legacyBehavior>
                                 <Nav.Link>
-                                    Login 
+                                    Sair 
+                                </Nav.Link>
+                            </Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>);
+    }
+    else if(props.modo ==="loginADM"){
+        return(
+            /*NAVBAR - FUNÇÕES LEITOR*/
+            <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
+                <Container>
+                    <Link href="/" passHref legacyBehavior>
+                        <Navbar.Brand>
+                            StringElements
+                        </Navbar.Brand>
+                    </Link>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                            <Link href="/" passHref legacyBehavior>
+                                <Nav.Link>
+                                    Inicio
+                                </Nav.Link>
+                            </Link>
+                            <NavDropdown title="Cadastrar">
+                                <Link href="/admin/autor" passHref legacyBehavior>
+                                    <NavDropdown.Item>Autor</NavDropdown.Item>
+                                </Link>
+                            </NavDropdown>
+                            <NavDropdown title="Gerenciamento">
+                                <Link href="/" passHref legacyBehavior>
+                                    <NavDropdown.Item>Listar Usuários</NavDropdown.Item>
+                                </Link>
+                            </NavDropdown>
+                        </Nav>
+                        <Nav>
+                            <Link href="/" passHref legacyBehavior>
+                                <Nav.Link>
+                                    Sair 
+                                </Nav.Link>
+                            </Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>);
+    }
+    else if(props.modo ==="loginADM"){
+        return(
+            /*NAVBAR - FUNÇÕES AUTOR*/
+            <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
+                <Container>
+                    <Link href="/" passHref legacyBehavior>
+                        <Navbar.Brand>
+                            StringElements
+                        </Navbar.Brand>
+                    </Link>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                            <Link href="/" passHref legacyBehavior>
+                                <Nav.Link>
+                                    Inicio
+                                </Nav.Link>
+                            </Link>
+                            <NavDropdown title="Cadastrar">
+                                <Link href="/noticias/cadastrar" passHref legacyBehavior>
+                                    <NavDropdown.Item>Nova Notícia</NavDropdown.Item>
+                                </Link>
+                            </NavDropdown>
+                            <NavDropdown title="Gerenciamento">
+                                <Link href="/" passHref legacyBehavior>
+                                    <NavDropdown.Item>Notícias pendentes</NavDropdown.Item>
+                                </Link>
+                            </NavDropdown>
+                        </Nav>
+                        <Nav>
+                            <Link href="/" passHref legacyBehavior>
+                                <Nav.Link>
+                                    Sair 
                                 </Nav.Link>
                             </Link>
                         </Nav>
