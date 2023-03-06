@@ -31,12 +31,12 @@ export default function PrimeiroAcessoADM() {
         </div>
         <div className="form-floating mt-2">
             <input type="email" className="form-control" id="emailADM"
-                placeholder="Data" value={dadosADM.emailADM} onChange={handleChange} name="emailADM" />
+                placeholder="Email" value={dadosADM.emailADM} onChange={handleChange} name="emailADM" />
             <label htmlFor="emailADM">Email</label>
         </div>
         <div className="form-floating mt-2">
             <input type="password" className="form-control" id="senhaADM"
-                placeholder="Data" value={dadosADM.senhaADM} onChange={handleChange} name="senhaADM" />
+                placeholder="Senha" value={dadosADM.senhaADM} onChange={handleChange} name="senhaADM" />
             <label htmlFor="senhaADM">Senha</label>
         </div>
         <input type="submit" className="btn btn-primary mt-1 col-12 bg-black" value="Cadastrar"/>

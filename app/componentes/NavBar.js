@@ -1,22 +1,46 @@
 'use client';
 import Link from 'next/link';
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown, Modal, Button } from 'react-bootstrap';
 
 export default function NavBar(props) {
-    if(props.modo === "primeiroAcessoADM"){
+    if(props.modo === "semLogin"){
         return(
-                /*NAVBAR - PRIMEIRA EXECUÇÃO - CADASTRO DE ADMINISTRADOR*/
-                <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
-                    <Container>
-                        <Link href="/" passHref legacyBehavior>
-                            <Navbar.Brand>
-                                StringElements
-                            </Navbar.Brand>
-                        </Link>
-                    </Container>
-                </Navbar>)
-    }else if(props.modo ==="adm"){
+            /*NAVBAR - TELA INICIAL - SEM LOGIN*/
+            <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
+                <Container>
+                    <Link href="/" passHref legacyBehavior>
+                        <Navbar.Brand>
+                            StringElements
+                        </Navbar.Brand>
+                    </Link>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                            <Link href="/" passHref legacyBehavior>
+                                <Nav.Link>
+                                    Inicio
+                                </Nav.Link>
+                            </Link>
+                            <NavDropdown title="Área VIP">
+                                <Link href="/leitores" passHref legacyBehavior>
+                                    <NavDropdown.Item>Cadastre-se</NavDropdown.Item>
+                                </Link>
+                            </NavDropdown>
+                        </Nav>
+                        <Nav>
+                            <Link href="/login" passHref legacyBehavior>
+                                <Nav.Link>
+                                    Login 
+                                </Nav.Link>
+                            </Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+            )
+    }else if(props.modo ==="semLoginADM"){
         return(
+            /*NAVBAR - PRIMEIRA EXECUÇÃO - SEM ADM*/
             <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
                 <Container>
                     <Link href="/" passHref legacyBehavior>
@@ -24,6 +48,46 @@ export default function NavBar(props) {
                             StringElementsADM
                         </Navbar.Brand>
                     </Link>
+                </Container>
+            </Navbar>);
+    }
+    else if(props.modo ==="loginADM"){
+        return(
+            /*NAVBAR - FUNÇÕES ADMINISTRADOR*/
+            <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
+                <Container>
+                    <Link href="/" passHref legacyBehavior>
+                        <Navbar.Brand>
+                            StringElements
+                        </Navbar.Brand>
+                    </Link>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                            <Link href="/" passHref legacyBehavior>
+                                <Nav.Link>
+                                    Inicio
+                                </Nav.Link>
+                            </Link>
+                            <NavDropdown title="Cadastrar">
+                                <Link href="/admin/autor" passHref legacyBehavior>
+                                    <NavDropdown.Item>Autor</NavDropdown.Item>
+                                </Link>
+                            </NavDropdown>
+                            <NavDropdown title="CADASTRE-SE">
+                                <Link href="/" passHref legacyBehavior>
+                                    <NavDropdown.Item>Seja um leitor VIP</NavDropdown.Item>
+                                </Link>
+                            </NavDropdown>
+                        </Nav>
+                        <Nav>
+                            <Link href="/" passHref legacyBehavior>
+                                <Nav.Link>
+                                    Login 
+                                </Nav.Link>
+                            </Link>
+                        </Nav>
+                    </Navbar.Collapse>
                 </Container>
             </Navbar>);
     }

@@ -25,7 +25,7 @@ export default function CadastroLeitor() {
   return (
     <Stack gap={2} className="col-md-5 mx-auto" >
       <p></p>
-      <Alert variant="secondary"><Alert.Heading>Olá! Você está prestes a se tornar um LEITOR registrado, por favor preencha os campos abaixo:</Alert.Heading></Alert>
+      <Alert variant="secondary"><Alert.Heading>Olá! Você está prestes a se tornar um LEITOR VIP, por favor preencha os campos abaixo:</Alert.Heading></Alert>
       <form onSubmit={enviaDadosLeitor}>
         <div className="form-floating">
           <input type="text" className="form-control" id="nomeLeitor"
