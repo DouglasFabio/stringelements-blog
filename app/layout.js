@@ -4,7 +4,6 @@ import Footer from './componentes/Footer';
 import NavBar from './componentes/NavBar';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import "@fortawesome/fontawesome-free/css/all.min.css"
-import styled from 'styled-components'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { createContext } from 'react';

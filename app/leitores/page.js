@@ -20,7 +20,7 @@ export default function CadastroLeitor() {
   const onSubmit = (data) => {
       setBusy(true);
 
-      const url = '/api/usuarios';
+      const url = '/api/Usuarios';
 
       var args = {
           method: 'POST',
@@ -34,7 +34,6 @@ export default function CadastroLeitor() {
       fetch(url, args).then((result) => {
           setBusy(false);
           result.json().then((resultData) => {
-              
               if (result.status == 200) {
                   //ações em caso de sucesso
                   messageCallback({ tipo: 'sucesso', texto: resultData });
@@ -88,8 +87,14 @@ export default function CadastroLeitor() {
             <span className='text-danger'>{errors.senha?.message}</span>
           <label htmlFor="senhaLeitor">Senha Leitor:</label>
         </div>
+        <div className="form-floating mt-1" hidden>
+            <input type="text" name="codAtivacao" value="CODALEAT" {...register("codAtivacao")} />
+            <input type="text" name="statusSenha" value="N" {...register("statusSenha")} />
+            <input type="text" name="statusConta" value="N" {...register("statusConta")} />
+            <input type="text" name="tipoUsuario" value="L" {...register("tipoUsuario")} />
+        </div>
         <BusyButton variant="btn btn-primary mt-3 col-12 bg-black" type="submit" label="Cadastrar" busy={busy}/>
-        <div className="btn btn-primary mt-2 col-12 bg-black" htmlFor="voltar"><Link id="voltar" href="/" passHref legacyBehavior>Voltar</Link></div>
+        <div className="btn btn-primary mt-2 col-12 text-white bg-black" htmlFor="voltar"><Link href="/" passHref legacyBehavior>Voltar</Link></div>
       </form>
     </Stack>
   );
