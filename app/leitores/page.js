@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { schemaLeitor } from '../schemas/validacaoForm';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BusyButton from '../componentes/BusyButton';
-import { codAtivacao } from '../componentes/CodAtivacao';
+import geraCodigo, { codAtivacao } from '../componentes/CodAtivacao';
 
 export default function CadastroLeitor() {
   const [busy, setBusy] = useState(false);
@@ -90,7 +90,7 @@ export default function CadastroLeitor() {
           <label htmlFor="senhaLeitor">Senha Leitor:</label>
         </div>
         <div className="form-floating mt-1" hidden>
-            <input type="text" name="codAtivacao" value={codAtivacao} {...register("codAtivacao")} />
+            <input type="text" name="codAtivacao" value={geraCodigo()} {...register("codAtivacao")} />
             <input type="text" name="statusSenha" value="N" {...register("statusSenha")}  />
             <input type="text" name="statusConta" value="N" {...register("statusConta")}  />
             <input type="text" name="tipoUsuario" value="L" {...register("tipoUsuario")}  />
