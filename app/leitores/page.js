@@ -1,36 +1,26 @@
 'use client'
 import Link from 'next/link';
-import { useState } from 'react';
+import { useContext,  useState } from 'react';
 import { Alert, Stack } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import styled from 'styled-components'
+import { MessageCallbackContext } from "../layout";
+import { useForm } from 'react-hook-form';
+import { schemaLeitor } from '../schemas/validacaoForm';
+import { yupResolver } from '@hookform/resolvers/yup';
+import BusyButton from '../componentes/BusyButton';
 
-export const schema = yup.object({
-  nome: yup.string()
-      .min(1, 'O nome deve conter, no mínimo, 3 caracteres')
-      .max(100, 'O nome deve conter, no máximo, 100 caracteres')
-      .required('O nome é obrigatório'),
-  descricao: yup.string()
-      .min(5, 'A descrição deve conter, no mínimo, 5 caracteres')
-      .required('A descrição é obrigatória')
-}).required();
-
-export default function TipoCursoNovo() {
-  const [modalShow, setModalShow] = useState(false);
+export default function CadastroLeitor() {
   const [busy, setBusy] = useState(false);
 
   const messageCallback = useContext(MessageCallbackContext);
-  const atualizarCallback = useContext(AtualizarTipoCursoContext);
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
-      resolver: yupResolver(schema)
+  const { register, handleSubmit, formState: { errors } } = useForm({
+      resolver: yupResolver(schemaLeitor)
   });
 
   const onSubmit = (data) => {
       setBusy(true);
 
-      const url = '/api/tipocurso';
+      const url = '/api/usuarios';
 
       var args = {
           method: 'POST',
@@ -47,9 +37,7 @@ export default function TipoCursoNovo() {
               
               if (result.status == 200) {
                   //ações em caso de sucesso
-                  atualizarCallback.atualizar(true);
                   messageCallback({ tipo: 'sucesso', texto: resultData });
-                  handleClose();
               }
               else {
                   //ações em caso de erro
@@ -71,43 +59,37 @@ export default function TipoCursoNovo() {
       
   }
 
-  const handleClose = () => {
-      setModalShow(false);
-  }
-
-  useEffect(() => {
-      if (modalShow === false) {
-          reset({ nome: '', descricao: '' })
-      }
-  }, [modalShow]);
-
   return (
     <Stack gap={2} className="col-md-5 mx-auto" >
       <p></p>
       <Alert variant="secondary"><Alert.Heading>Olá! Você está prestes a se tornar um LEITOR VIP, por favor preencha os campos abaixo:</Alert.Heading></Alert>
-      <form onSubmit={enviaDadosLeitor}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-floating">
-          <input type="text" className="form-control" id="nomeLeitor"
-              placeholder="Nome Leitor" value={dadosLeitor.nomeAutor} onChange={handleChange} name="nomeLeitor" />
-          <label htmlFor="nomeLeitor">Nome Leitor:</label>
+            <input type="text" className="form-control" id="nomeLeitor" {...register("nome")}
+              placeholder="Nome Leitor"  name="nome" />
+            <span className='text-danger'>{errors.nome?.message}</span>
+            <label htmlFor="nomeLeitor">Nome Leitor:</label>
         </div>
         <div className="form-floating mt-1">
-            <input type="email" className="form-control" id="emailLeitor"
-                placeholder="Email Leitor" value={dadosLeitor.emailAutor} onChange={handleChange} name="emailAutor" />
+            <input type="text" className="form-control" id="emailLeitor" {...register("email")}
+                placeholder="Email Leitor"  name="email" />
+            <span className='text-danger'>{errors.email?.message}</span>
             <label htmlFor="emailLeitor">Email Leitor:</label>
         </div>
         <div className="form-floating mt-1">
-          <input type="date" className="form-control" id="dataNascimentoAutor"
-              placeholder="Data Nascimento" value={dadosLeitor.dataNascimentoAutor} onChange={handleChange} name="dataNascimentoLeitor" />
-          <label htmlFor="dataNascimentoLeitor">Data Nascimento:</label>
+            <input type="date" className="form-control" id="dtNascLeitor" {...register("dtnascimento")}
+              placeholder="Data Nascimento" name="dtnascimento" />
+            <span className='text-danger'>{errors.dtnascimento?.message}</span>
+          <label htmlFor="dtNascLeitor">Data Nascimento:</label>
         </div>
         <div className="form-floating mt-1">
-          <input type="password" className="form-control" id="senhaLeitor"
-              placeholder="Senha Leitor" value={dadosLeitor.senhaLeitor} onChange={handleChange} name="senhaLeitor" />
+            <input type="password" className="form-control" id="senhaLeitor" {...register("senha")}
+              placeholder="Senha Leitor"  name="senha" />
+            <span className='text-danger'>{errors.senha?.message}</span>
           <label htmlFor="senhaLeitor">Senha Leitor:</label>
         </div>
-        <input type="submit" className="btn btn-primary mt-3 col-12 bg-black" value="Cadastrar"/>
-        <div className="btn btn-primary mt-2 col-12 bg-black"><Link href="/" passHref legacyBehavior>Voltar</Link></div>
+        <BusyButton variant="btn btn-primary mt-3 col-12 bg-black" type="submit" label="Cadastrar" busy={busy}/>
+        <div className="btn btn-primary mt-2 col-12 bg-black" htmlFor="voltar"><Link id="voltar" href="/" passHref legacyBehavior>Voltar</Link></div>
       </form>
     </Stack>
   );
