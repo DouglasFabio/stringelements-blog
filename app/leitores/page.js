@@ -6,21 +6,80 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styled from 'styled-components'
 
-export default function CadastroLeitor() {
+export const schema = yup.object({
+  nome: yup.string()
+      .min(1, 'O nome deve conter, no mínimo, 3 caracteres')
+      .max(100, 'O nome deve conter, no máximo, 100 caracteres')
+      .required('O nome é obrigatório'),
+  descricao: yup.string()
+      .min(5, 'A descrição deve conter, no mínimo, 5 caracteres')
+      .required('A descrição é obrigatória')
+}).required();
 
-  const [dadosLeitor, setDadosLeitor] = useState({
-    nomeLeitor: '',
-    emailLeitor: '',
-    dataNascimentoLeitor: '',
-    senhaLeitor: ''
+export default function TipoCursoNovo() {
+  const [modalShow, setModalShow] = useState(false);
+  const [busy, setBusy] = useState(false);
+
+  const messageCallback = useContext(MessageCallbackContext);
+  const atualizarCallback = useContext(AtualizarTipoCursoContext);
+
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+      resolver: yupResolver(schema)
   });
 
-  const handleChange = e => setDadosLeitor({...dadosLeitor, [e.target.name]: e.target.value});
+  const onSubmit = (data) => {
+      setBusy(true);
 
-  const enviaDadosLeitor = async e =>{
-    e.preventDefault(); //nao limpar o console após o submit
-    console.log(dadosLeitor.nomeAutor+dadosLeitor.emailAutor);
+      const url = '/api/tipocurso';
+
+      var args = {
+          method: 'POST',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+      };
+
+      fetch(url, args).then((result) => {
+          setBusy(false);
+          result.json().then((resultData) => {
+              
+              if (result.status == 200) {
+                  //ações em caso de sucesso
+                  atualizarCallback.atualizar(true);
+                  messageCallback({ tipo: 'sucesso', texto: resultData });
+                  handleClose();
+              }
+              else {
+                  //ações em caso de erro
+                  let errorMessage = '';
+                  if (resultData.errors != null) {
+                      const totalErros = Object.keys(resultData.errors).length;
+
+                      for (var i = 0; i < totalErros; i++) {
+                          errorMessage = errorMessage + Object.values(resultData.errors)[i] + "<br/>";
+                      }
+                  }
+                  else
+                      errorMessage = resultData;
+
+                  messageCallback({ tipo: 'erro', texto: errorMessage });
+              }
+          })
+      });
+      
   }
+
+  const handleClose = () => {
+      setModalShow(false);
+  }
+
+  useEffect(() => {
+      if (modalShow === false) {
+          reset({ nome: '', descricao: '' })
+      }
+  }, [modalShow]);
 
   return (
     <Stack gap={2} className="col-md-5 mx-auto" >
