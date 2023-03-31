@@ -7,13 +7,14 @@ import { useForm } from 'react-hook-form';
 import { schemaLeitor } from '../schemas/validacaoForm';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BusyButton from '../componentes/BusyButton';
+import { codAtivacao } from '../componentes/CodAtivacao';
 
 export default function CadastroLeitor() {
   const [busy, setBusy] = useState(false);
 
   const messageCallback = useContext(MessageCallbackContext);
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
       resolver: yupResolver(schemaLeitor)
   });
 
@@ -37,6 +38,7 @@ export default function CadastroLeitor() {
               if (result.status == 200) {
                   //ações em caso de sucesso
                   messageCallback({ tipo: 'sucesso', texto: resultData });
+                  reset();
               }
               else {
                   //ações em caso de erro
@@ -77,7 +79,7 @@ export default function CadastroLeitor() {
         </div>
         <div className="form-floating mt-1">
             <input type="date" className="form-control" id="dtNascLeitor" {...register("dtnascimento")}
-              placeholder="Data Nascimento" name="dtnascimento" />
+              placeholder="Data Nascimento" name="dtnascimento" maxlength="10" />
             <span className='text-danger'>{errors.dtnascimento?.message}</span>
           <label htmlFor="dtNascLeitor">Data Nascimento:</label>
         </div>
@@ -88,10 +90,10 @@ export default function CadastroLeitor() {
           <label htmlFor="senhaLeitor">Senha Leitor:</label>
         </div>
         <div className="form-floating mt-1" hidden>
-            <input type="text" name="codAtivacao" value="CODALEAT" {...register("codAtivacao")} />
-            <input type="text" name="statusSenha" value="N" {...register("statusSenha")} />
-            <input type="text" name="statusConta" value="N" {...register("statusConta")} />
-            <input type="text" name="tipoUsuario" value="L" {...register("tipoUsuario")} />
+            <input type="text" name="codAtivacao" value={codAtivacao} {...register("codAtivacao")} />
+            <input type="text" name="statusSenha" value="N" {...register("statusSenha")}  />
+            <input type="text" name="statusConta" value="N" {...register("statusConta")}  />
+            <input type="text" name="tipoUsuario" value="L" {...register("tipoUsuario")}  />
         </div>
         <BusyButton variant="btn btn-primary mt-3 col-12 bg-black" type="submit" label="Cadastrar" busy={busy}/>
         <div className="btn btn-primary mt-2 col-12 text-white bg-black" htmlFor="voltar"><Link href="/" passHref legacyBehavior>Voltar</Link></div>
