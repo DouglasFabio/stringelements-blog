@@ -4,7 +4,7 @@ import { useContext,  useState } from 'react';
 import { Alert, Stack } from 'react-bootstrap';
 import { MessageCallbackContext } from "../layout";
 import { useForm } from 'react-hook-form';
-import { schemaLeitor } from '../schemas/validacaoForm';
+import { schemaUsuario } from '../schemas/validacaoForm';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BusyButton from '../componentes/BusyButton';
 import geraCodigo, { codAtivacao } from '../componentes/CodAtivacao';
@@ -15,12 +15,12 @@ export default function CadastroLeitor() {
   const messageCallback = useContext(MessageCallbackContext);
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
-      resolver: yupResolver(schemaLeitor)
+      resolver: yupResolver(schemaUsuario)
   });
 
   const onSubmit = (data) => {
       setBusy(true);
-
+      
       const url = '/api/Usuarios';
 
       var args = {
@@ -31,7 +31,7 @@ export default function CadastroLeitor() {
           },
           body: JSON.stringify(data)
       };
-
+      
       fetch(url, args).then((result) => {
           setBusy(false);
           result.json().then((resultData) => {
@@ -79,7 +79,7 @@ export default function CadastroLeitor() {
         </div>
         <div className="form-floating mt-1">
             <input type="date" className="form-control" id="dtNascLeitor" {...register("dtnascimento")}
-              placeholder="Data Nascimento" name="dtnascimento" maxlength="10" />
+              placeholder="Data Nascimento" name="dtnascimento" maxLength={10} />
             <span className='text-danger'>{errors.dtnascimento?.message}</span>
           <label htmlFor="dtNascLeitor">Data Nascimento:</label>
         </div>

@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const schemaLeitor = yup.object({
+export const schemaUsuario = yup.object({
     nome: yup.string()
         .min(1, 'O nome deve conter, no mínimo, 3 caracteres')
         .max(50, 'O nome deve conter, no máximo, 50 caracteres')
