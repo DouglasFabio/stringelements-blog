@@ -41,7 +41,7 @@ export default function CadastroLeitor() {
                   //ações em caso de sucesso
                   messageCallback({ tipo: 'sucesso', texto: resultData });
                   reset();
-                  handler(res.redirect(307, '/leitores/verificacao'));                 
+                  //handler(res.redirect(307, '/leitores/verificacao'));                 
               }
               else {
                   //ações em caso de erro
@@ -76,7 +76,7 @@ export default function CadastroLeitor() {
         </div>
         <div className="form-floating mt-1">
             <input type="text" className="form-control" id="emailLeitor" {...register("email")}
-                placeholder="Email Leitor"  name="email" />
+                placeholder="Email Leitor"  name="email"/>
             <span className='text-danger'>{errors.email?.message}</span>
             <label htmlFor="emailLeitor">Email Leitor:</label>
         </div>
