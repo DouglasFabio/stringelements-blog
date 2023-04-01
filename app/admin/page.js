@@ -7,7 +7,7 @@ import { schemaUsuario } from '../schemas/validacaoForm';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BusyButton from '../componentes/BusyButton';
 
-export default function PrimeiroAcessoADM() {
+export default function CadastroAdmin() {
 
   const [busy, setBusy] = useState(false);
 
@@ -20,7 +20,7 @@ export default function PrimeiroAcessoADM() {
   const onSubmit = (data) => {
       setBusy(true);
       
-      const url = '/api/Admin';
+      const url = '/api/Usuarios';
 
       var args = {
           method: 'POST',
@@ -83,6 +83,7 @@ export default function PrimeiroAcessoADM() {
             <label htmlFor="senhaADM">Senha:</label>
         </div>
         <div className="form-floating mt-1" hidden>
+            <input type="text" name="codAtivacao" value="" {...register("codAtivacao")}  />
             <input type="text" name="statusSenha" value="V" {...register("statusSenha")}  />
             <input type="text" name="statusConta" value="V" {...register("statusConta")}  />
             <input type="text" name="tipoUsuario" value="A" {...register("tipoUsuario")}  />

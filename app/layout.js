@@ -8,14 +8,14 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { createContext } from 'react';
 
-const MySwal = withReactContent(Swal);
+export const MySwal = withReactContent(Swal);
 export const MessageCallbackContext = createContext(null);
 
 export const metadata = {
   title: 'StringElements Blog',
 }
 
-const handleMessageCallback = (msg) => {
+export const handleMessageCallback = (msg) => {
   if (msg.tipo !== 'nada') {
       let icon = '';
       if (msg.tipo === 'sucesso')

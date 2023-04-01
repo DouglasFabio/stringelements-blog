@@ -8,6 +8,8 @@ import { schemaUsuario } from '../schemas/validacaoForm';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BusyButton from '../componentes/BusyButton';
 import geraCodigo, { codAtivacao } from '../componentes/CodAtivacao';
+import { redirect } from 'next/dist/server/api-utils';
+import handler from '../api/hello';
 
 export default function CadastroLeitor() {
   const [busy, setBusy] = useState(false);
@@ -39,6 +41,7 @@ export default function CadastroLeitor() {
                   //ações em caso de sucesso
                   messageCallback({ tipo: 'sucesso', texto: resultData });
                   reset();
+                  handler(res.redirect(307, '/leitores/verificacao'));                 
               }
               else {
                   //ações em caso de erro

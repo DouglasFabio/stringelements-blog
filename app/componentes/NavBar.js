@@ -91,7 +91,7 @@ export default function NavBar(props) {
                 </Container>
             </Navbar>);
     }
-    else if(props.modo ==="loginADM"){
+    else if(props.modo ==="admin"){
         return(
             /*NAVBAR - FUNÇÕES LEITOR*/
             <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
