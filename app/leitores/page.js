@@ -9,7 +9,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import BusyButton from '../componentes/BusyButton';
 import geraCodigo, { codAtivacao } from '../componentes/CodAtivacao';
 import { redirect } from 'next/dist/server/api-utils';
-import handler from '../api/hello';
 
 export default function CadastroLeitor() {
   const [busy, setBusy] = useState(false);

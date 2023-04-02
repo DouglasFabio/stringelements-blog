@@ -2,12 +2,12 @@ CREATE TABLE TB_Usuarios(
 
 -- LEGENDA StatusSenha:
 -- - V: Verificada
--- - N: Não Verificada
+-- - N: Nï¿½o Verificada
 
 -- LEGENDA StatusConta:
 -- - B: Bloqueada (somente admin)
 -- - V: Verificada
--- - N: Não Verificada
+-- - N: Nï¿½o Verificada
 
 -- LEGENDA TipoUsuario:
 -- - M: Administrador
@@ -20,9 +20,10 @@ Email varchar(50) unique NOT NULL,
 Senha varchar(max) NOT NULL,
 DTNascimento date,
 CodAtivacao varchar(max) NOT NULL,
-StatusSenha varchar(1) NOT NULL,
-StatusConta varchar(1) NOT NULL,
-TipoUsuario varchar(1) NOT NULL
+CodSenha varchar(max),
+StatusSenha varchar(1),
+StatusConta varchar(1),
+TipoUsuario varchar(1)
 )
 
 CREATE TABLE TB_Autores(
@@ -38,7 +39,7 @@ CREATE TABLE TB_Noticias(
 
 -- LEGENDA Situacao:
 -- - P: Publicada
--- - N: Não Publicada
+-- - N: Nï¿½o Publicada
 
 IDNoticia int primary key identity NOT NULL,
 Titulo varchar(25) NOT NULL,
@@ -56,11 +57,12 @@ CREATE TABLE TB_StatusNoticias(
 -- LEGENDA StatusNoticia:
 -- - 0: Sem curtida
 -- - 1: Gostei
--- - 2: Não Gostei
+-- - 2: Nï¿½o Gostei
 
 IDStatusNoticia int primary key identity NOT NULL,
 StatusNoticia int NOT NULL,
 Comentario varchar(max),
+DtComentario date,
 CODNoticia int,
 CODLeitor int,
 FOREIGN KEY (CODNoticia) REFERENCES TB_Noticias(IDNoticia),

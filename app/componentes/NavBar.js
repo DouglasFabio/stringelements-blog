@@ -45,7 +45,7 @@ export default function NavBar(props) {
                 <Container>
                     <Link href="/" passHref legacyBehavior>
                         <Navbar.Brand>
-                            StringElementsADM
+                            StringElements
                         </Navbar.Brand>
                     </Link>
                 </Container>
