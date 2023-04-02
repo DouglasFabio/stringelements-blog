@@ -91,7 +91,7 @@ export default function AtualizarSenha() {
                         </label>
                         <label className="row mx-2 mt-2">
                             Nova Senha:
-                            <input type="text" className="form-control"  {...register("novaSenha")} />
+                            <input type="password" className="form-control"  {...register("novaSenha")} />
                             <span className='text-danger'>{errors.novaSenha?.message}</span>
                         </label>
                     </Modal.Body>
