@@ -24,7 +24,7 @@ export const handleMessageCallback = (msg) => {
           icon = 'error';
 
       MySwal.fire({
-          position: 'top-end',
+          position: 'top',
           icon: icon,
           title: msg.texto,
           showConfirmButton: false,

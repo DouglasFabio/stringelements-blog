@@ -10,12 +10,12 @@ export const metadata = {
   title: 'StringElements Blog',
 }
 
-export default function RootLayout({ children }) {
+export default function Admin({ children }) {
   return (
     <html lang="en">
       <body>
         <>
-            <NavBar modo="admin"/>
+            <NavBar modo="semLoginADM"/>
             <MessageCallbackContext.Provider value={handleMessageCallback}>
               {children}
               <Footer/>
