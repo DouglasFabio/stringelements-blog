@@ -24,7 +24,7 @@ StatusSenha varchar(1),
 StatusConta varchar(1),
 TipoUsuario varchar(1),
 CodSenha varchar(max),
-DTAltSenha date
+DTAltSenha datetime
 )
 
 CREATE TABLE TB_Autores(
