@@ -7,7 +7,6 @@ import { useForm } from 'react-hook-form';
 import { schemaResetSenha } from '../schemas/validacaoForm';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BusyButton from '../componentes/BusyButton';
-import geraCodigo from '../componentes/CodAtivacao';
 import AtualizarSenha from './atualizarsenha';
 
 export const AtualizarSenhaContext = createContext(null);
@@ -84,7 +83,7 @@ export default function ResetSenha() {
               <label htmlFor="emailLeitor">Email:</label>
         </div>
         <div className="form-floating mt-1" hidden>
-            <input type="text" name="codSenha" value={geraCodigo()} {...register("codSenha")} />
+            <input type="text" name="codSenha" {...register("codSenha")} />
             <input type="text" name="nome" value="" {...register("nome")} />
         </div>
         <BusyButton onClick={() => setModalShow(true)} variant="btn btn-primary mt-3 col-12 bg-black" type="submit" label="Enviar" busy={busy}/>

@@ -1,6 +1,5 @@
 'use client'
 import { Badge, Stack } from "react-bootstrap";
-import DataAtual from "./componentes/DataAtual";
 
 export default function Noticias(){
     return(
