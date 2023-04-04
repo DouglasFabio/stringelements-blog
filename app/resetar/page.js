@@ -15,18 +15,12 @@ export const AtualizarSenhaContext = createContext(null);
 export default function ResetSenha() {
 
   const [busy, setBusy] = useState(false);
-  const [grid, setGrid] = useState(null);
-  const [atualizarGrid, setAtualizarGrid] = useState(null);
   const [operacao, setOperacao] = useState({ id: null, action: null });
 
   let modal = null;
 
-    if(operacao.action === "update"){
-        modal = "<TipoCursoAtualizacao id={operacao.id}/>";
-    }
-
     const fecharModals = () => {
-        setOperacao({id:null, action:null});
+        reset({ codSenha: '', senha: '' })
     }
 
   const messageCallback = useContext(MessageCallbackContext);
@@ -38,7 +32,7 @@ export default function ResetSenha() {
   const onSubmit = (data) => {
     setBusy(true);
     
-    const url = '/api/ResetarSenha';
+    const url = '/api/EnviaCodSenha';
 
     var args = {
         method: 'POST',
@@ -96,7 +90,7 @@ export default function ResetSenha() {
         <BusyButton onClick={() => setModalShow(true)} variant="btn btn-primary mt-3 col-12 bg-black" type="submit" label="Enviar" busy={busy}/>
         <div className="btn btn-primary mt-2 col-12 text-white bg-black" htmlFor="voltar"><Link href="/" passHref legacyBehavior>Voltar</Link></div>
       </form>
-      <AtualizarSenhaContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
+      <AtualizarSenhaContext.Provider value={{fechar: fecharModals}}>
         <AtualizarSenha />
         {modal}
       </AtualizarSenhaContext.Provider>

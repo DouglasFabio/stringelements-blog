@@ -70,7 +70,7 @@ export default function AtualizarSenha() {
 
     useEffect(() => {
         if (modalShow === false) {
-            reset({ codSenha: '', novaSenha: '' })
+            reset({ codSenha: '', senha: '' })
         }
     }, [modalShow]);
 
@@ -86,17 +86,17 @@ export default function AtualizarSenha() {
                     <Modal.Body>
                         <label className="row mx-2">
                             Código de Reset:
-                            <input type="text" className="form-control" name="codSenhaRecebido"  {...register("codSenha")} />
+                            <input type="text" className="form-control" name="codSenha"  {...register("codSenha")} />
                             <span className='text-danger'>{errors.codSenha?.message}</span>
                         </label>
                         <label className="row mx-2 mt-2">
                             Nova Senha:
                             <input type="password" className="form-control" name="senha"  {...register("senha")} />
-                            <span className='text-danger'>{errors.novaSenha?.message}</span>
+                            <span className='text-danger'>{errors.senha?.message}</span>
                         </label>
                         <label className="row mx-2 mt-2" hidden>
-                            <input type="text" className="form-control" name="nome" value="nome" {...register("nome")} />
-                            <input type="text" className="form-control" name="email" value="email" {...register("email")} />
+                            <input type="text" className="form-control" name="nome" value="" {...register("nome")} />
+                            <input type="text" className="form-control" name="email" value="" {...register("email")} />
                         </label>
                     </Modal.Body>
                     <Modal.Footer>

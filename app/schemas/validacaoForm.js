@@ -4,7 +4,7 @@ export const schemaNovaSenha = yup.object({
   codSenha: yup.string()
     .max(8, 'O código deve conter, no máximo, 8 caracteres')
     .required('O código é obrigatório'),
-  novaSenha: yup.string()
+  senha: yup.string()
     .min(8, 'A senha deve conter, no mínimo, 8 caracteres')
     .required('A senha é obrigatória')
     .matches(
