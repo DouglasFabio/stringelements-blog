@@ -29,25 +29,6 @@ export default function ResetSenha() {
         setOperacao({id:null, action:null});
     }
 
-    const pesquisar = () => {
-        fetch('/api/Usuarios').then((result) => {
-            result.json().then((data) => {
-                let finalGrid = data.map((p) =>{p.nome});
-                setGrid(finalGrid);
-            })
-        }
-        );
-    }
-
-    useEffect(() => {
-        if (atualizarGrid === null)
-            setAtualizarGrid(true);
-        if (atualizarGrid) {
-            setAtualizarGrid(false);
-            pesquisar();
-        }
-    }, [atualizarGrid])
-
   const messageCallback = useContext(MessageCallbackContext);
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
@@ -104,9 +85,9 @@ export default function ResetSenha() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-floating">
               <input type="text" className="form-control" id="emailLeitor" {...register("email")}
-                  placeholder="Email Leitor"  name="email"/>
+                  placeholder="Email"  name="email"/>
               <span className='text-danger'>{errors.email?.message}</span>
-              <label htmlFor="emailLeitor">Email Leitor:</label>
+              <label htmlFor="emailLeitor">Email:</label>
         </div>
         <div className="form-floating mt-1" hidden>
             <input type="text" name="codSenha" value={geraCodigo()} {...register("codSenha")} />

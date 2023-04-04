@@ -20,10 +20,11 @@ Email varchar(50) unique NOT NULL,
 Senha varchar(max) NOT NULL,
 DTNascimento date,
 CodAtivacao varchar(max) NOT NULL,
-CodSenha varchar(max),
 StatusSenha varchar(1),
 StatusConta varchar(1),
-TipoUsuario varchar(1)
+TipoUsuario varchar(1),
+CodSenha varchar(max),
+DTAltSenha date
 )
 
 CREATE TABLE TB_Autores(

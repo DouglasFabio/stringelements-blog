@@ -23,10 +23,10 @@ export default function AtualizarSenha() {
     const onSubmit = (data) => {
         setBusy(true);
 
-        const url = '/api/tipocurso';
+        const url = '/api/ResetarSenha';
 
         var args = {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -86,13 +86,17 @@ export default function AtualizarSenha() {
                     <Modal.Body>
                         <label className="row mx-2">
                             Código de Reset:
-                            <input type="text" className="form-control"  {...register("codSenha")} />
+                            <input type="text" className="form-control" name="codSenhaRecebido"  {...register("codSenha")} />
                             <span className='text-danger'>{errors.codSenha?.message}</span>
                         </label>
                         <label className="row mx-2 mt-2">
                             Nova Senha:
-                            <input type="password" className="form-control"  {...register("novaSenha")} />
+                            <input type="password" className="form-control" name="novaSenha"  {...register("novaSenha")} />
                             <span className='text-danger'>{errors.novaSenha?.message}</span>
+                        </label>
+                        <label className="row mx-2 mt-2" hidden>
+                            <input type="text" className="form-control" name="nome" value=" " {...register("nome")} />
+                            <input type="text" className="form-control" name="email" value=" " {...register("email")} />
                         </label>
                     </Modal.Body>
                     <Modal.Footer>
