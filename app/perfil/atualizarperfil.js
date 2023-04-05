@@ -1,6 +1,5 @@
-'use client'
+import { useEffect, useState, useContext } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MessageCallbackContext } from "../layout";
@@ -8,10 +7,11 @@ import { AtualizarPerfilContext } from "./page";
 import { schemaUsuario } from "../schemas/validacaoForm";
 import BusyButton from "../componentes/BusyButton";
 
+export default function PerfilAtualizacao(props) {
 
-export default function AtualizarPerfil() {
-    const [modalShow, setModalShow] = useState(false);
+    const [modalShow, setModalShow] = useState(true);
     const [busy, setBusy] = useState(false);
+    const [primeiroAcesso, setPrimeiroAcesso] = useState(null);
 
     const messageCallback = useContext(MessageCallbackContext);
     const atualizarCallback = useContext(AtualizarPerfilContext);
@@ -20,11 +20,17 @@ export default function AtualizarPerfil() {
         resolver: yupResolver(schemaUsuario)
     });
 
+    const handleClose = () => {
+        atualizarCallback.fechar();
+        setModalShow(false);
+    }
+
     const onSubmit = (data) => {
         setBusy(true);
 
-        const url = '/api/Usuarios';
+        data.id = props.id;
 
+        const url = '/api/Usuarios/' + props.id;
         var args = {
             method: 'PUT',
             headers: {
@@ -35,75 +41,75 @@ export default function AtualizarPerfil() {
         };
 
         fetch(url, args).then((result) => {
-            setBusy(false);
             result.json().then((resultData) => {
-                
+                setBusy(false);
                 if (result.status == 200) {
-                    //ações em caso de sucesso
+                    handleClose();
                     atualizarCallback.atualizar(true);
                     messageCallback({ tipo: 'sucesso', texto: resultData });
-                    handleClose();
                 }
                 else {
-                    //ações em caso de erro
                     let errorMessage = '';
                     if (resultData.errors != null) {
                         const totalErros = Object.keys(resultData.errors).length;
-
-                        for (var i = 0; i < totalErros; i++) {
+                        for (var i = 0; i < totalErros; i++)
                             errorMessage = errorMessage + Object.values(resultData.errors)[i] + "<br/>";
-                        }
                     }
                     else
                         errorMessage = resultData;
 
                     messageCallback({ tipo: 'erro', texto: errorMessage });
                 }
-            })
+            });
         });
-        
-    }
-
-    const handleClose = () => {
-        setModalShow(false);
     }
 
     useEffect(() => {
         if (modalShow === false) {
-            reset({ codSenha: '', senha: '' })
+            reset({ email: '', dtnascimento: '' })
         }
     }, [modalShow]);
 
-    return (
-        <>
-            <Button variant="btn btn-primary mt-3 col-12 bg-black" onClick={() => setModalShow(true)}>EDITAR</Button>
+    useEffect(() => {
+        if (primeiroAcesso === null)
+            setPrimeiroAcesso(true);
 
-            <Modal size="md" centered show={modalShow}>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <Modal.Header>
-                        <Modal.Title>Editar Perfil</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <label className="row mx-2">
-                            Email:
-                            <input type="email" className="form-control" name="email"  {...register("email")} />
-                            <span className='text-danger'>{errors.email?.message}</span>
-                        </label>
-                        <label className="row mx-2 mt-2">
-                            Data Nascimento:
-                            <input type="date" className="form-control" name="dtnascimento" maxLength={10}  {...register("dtnascimento")} />
-                            <span className='text-danger'>{errors.dtnascimento?.message}</span>
-                        </label>
-                        <label className="row mx-2 mt-2" hidden>
-                            <input type="text" className="form-control" name="nome" value="" {...register("nome")} />
-                        </label>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <BusyButton  variant="success" type="submit" label="Salvar" busy={busy}/>
-                        <Button variant="secondary" onClick={handleClose}>Fechar</Button>
-                    </Modal.Footer>
-                </form>
-            </Modal>
-        </>
+        if (primeiroAcesso) {
+            setPrimeiroAcesso(false);
+            const url = '/api/Usuarios/' + props.id;
+            fetch(url).then(
+                (result) => {
+                    result.json().then((data) => {
+                        reset({ email: data.email, dtnascimento: data.dtnascimento });
+                    })
+                }
+            );
+        }
+    }, [primeiroAcesso]);
+
+    return (
+        <Modal size="md" centered show={modalShow}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Modal.Header>
+                    <Modal.Title>Atualização de Perfil - {props.id} </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <label className="row mx-2">
+                        Email
+                        <input type="text" className="form-control" name="email"  {...register("email")} />
+                        <span className='text-danger'>{errors.email?.message}</span>
+                    </label>
+                    <label className="row mx-2 mt-2">
+                        Data de Nascimento
+                        <input type="date" className="form-control" maxLength={10} name="dtnascimento" {...register("dtnascimento")} />
+                        <span className='text-danger'>{errors.dtnascimento?.message}</span>
+                    </label>
+                </Modal.Body>
+                <Modal.Footer>
+                    <BusyButton variant="success" type="submit" label="Salvar" busy={busy} />
+                    <Button variant="secondary" onClick={handleClose}>Fechar</Button>
+                </Modal.Footer>
+            </form>
+        </Modal>
     )
 }

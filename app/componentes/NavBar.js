@@ -91,7 +91,7 @@ export default function NavBar(props) {
                 </Container>
             </Navbar>);
     }
-    else if(props.modo ==="admin"){
+    else if(props.modo ==="leitor"){
         return(
             /*NAVBAR - FUNÇÕES LEITOR*/
             <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
@@ -134,7 +134,7 @@ export default function NavBar(props) {
                 </Container>
             </Navbar>);
     }
-    else if(props.modo ==="loginADM"){
+    else if(props.modo ==="autor"){
         return(
             /*NAVBAR - FUNÇÕES AUTOR*/
             <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
@@ -174,39 +174,6 @@ export default function NavBar(props) {
                 </Container>
             </Navbar>);
     }
-                        /*
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="me-auto">
-                            <Link href="/" passHref legacyBehavior>
-                                <Nav.Link>
-                                    Inicio
-                                </Nav.Link>
-                            </Link>
-                            <NavDropdown title="Ações">
-                                <Link href="/" passHref legacyBehavior>
-                                    <NavDropdown.Item>Ação 1</NavDropdown.Item>
-                                </Link>
-                                <Link href="/" passHref legacyBehavior>
-                                    <NavDropdown.Item>Ação 2</NavDropdown.Item>
-                                </Link>
-                                <NavDropdown.Divider />
-                                <Link href="/" passHref legacyBehavior>
-                                    <NavDropdown.Item>Ação 3</NavDropdown.Item>
-                                </Link>
-                            </NavDropdown>
-                        </Nav>
-                        <Nav>
-                            <Link href="/" passHref legacyBehavior>
-                                <Nav.Link>
-                                     Sair 
-                                </Nav.Link>
-                            </Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                    */
-                
-
 
              /*
              ----------------------------------------------------------------------------------------------------------------------------------
@@ -217,7 +184,7 @@ export default function NavBar(props) {
                 - EXCLUIR COMENTÁRIOS
                 - REDEFINIR SENHA
             */
-
+            
 
 
             /*

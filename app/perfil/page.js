@@ -1,17 +1,28 @@
 'use client'
-import Link from 'next/link';
-import { createContext,  useEffect,  useState } from 'react';
-import { Alert, Stack } from 'react-bootstrap';
-import AtualizarPerfil from './atualizarPerfil';
+import { useEffect } from "react"
+import { createContext } from "react"
+import { useState } from "react"
+import { Button, Stack, Table } from "react-bootstrap"
+import PerfilAtualizacao from "./atualizarperfil"
+import { BsPencilSquare } from "react-icons/bs";
+
+export const metadata = {
+    title: 'Atualizar Perfil'
+}
 
 export const AtualizarPerfilContext = createContext(null);
 
-export default function Perfil() {
+export default function Page() {
+
     const [grid, setGrid] = useState(null);
     const [atualizarGrid, setAtualizarGrid] = useState(null);
     const [operacao, setOperacao] = useState({ id: null, action: null });
 
     let modal = null;
+
+    if(operacao.action === "update"){
+        modal = <PerfilAtualizacao id={operacao.id}/>
+    }
 
     const fecharModals = () => {
         setOperacao({id:null, action:null});
@@ -21,11 +32,13 @@ export default function Perfil() {
         fetch('/api/Usuarios').then((result) => {
             result.json().then((data) => {
                 let finalGrid = data.map((p) =>
-                    <ul key={p.IdUsuario}>
-                        <li> {p.Nome}</li>
-                        <li> {p.Email}</li>
-                        <li>{p.DtNascimento}</li>
-                    </ul>
+                    <tr key={p.id}>
+                        <td>{p.email}</td>
+                        <td>{p.dtnascimento}</td>
+                        <td>
+                            <Button variant="btn btn-primary col-6 bg-black" onClick={() => setOperacao({ id: p.id, action: "update" })}><BsPencilSquare/></Button>
+                        </td>
+                    </tr>
                 );
                 setGrid(finalGrid);
             })
@@ -42,17 +55,27 @@ export default function Perfil() {
         }
     }, [atualizarGrid])
 
-  return (
-    <Stack gap={2} className="col-md-5 mx-auto" >
-      <p></p>
-      <Alert variant="secondary"><Alert.Heading>MEU PERFIL</Alert.Heading></Alert>
-        {grid}
-        <AtualizarPerfilContext.Provider value={{fechar: fecharModals}}>
-            <AtualizarPerfil />
-            {modal}
-        </AtualizarPerfilContext.Provider>
-        <div className="btn btn-primary mt-2 col-12 text-white bg-black" htmlFor="voltar"><Link href="/" passHref legacyBehavior>Voltar</Link></div>
-      
-    </Stack>
-  );
+    return (
+        <>
+            <Stack gap={2} className="col-md-5 mx-auto" >
+            <p></p>
+            <AtualizarPerfilContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
+                {modal}
+            </AtualizarPerfilContext.Provider>
+
+            <Table striped hover>
+                <thead>
+                    <tr>
+                        <th>NOME</th>
+                        <th>DATA DE NASCIMENTO</th>
+                        <th>EDITAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {grid}
+                </tbody>
+            </Table>
+            </Stack>
+        </>
+    )
 }
