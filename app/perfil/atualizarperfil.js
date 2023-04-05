@@ -28,9 +28,9 @@ export default function PerfilAtualizacao(props) {
     const onSubmit = (data) => {
         setBusy(true);
 
-        data.id = props.id;
+        data.email = props.email;
 
-        const url = '/api/Usuarios/' + props.id;
+        const url = '/api/Usuarios/' + props.email;
         var args = {
             method: 'PUT',
             headers: {
@@ -76,7 +76,7 @@ export default function PerfilAtualizacao(props) {
 
         if (primeiroAcesso) {
             setPrimeiroAcesso(false);
-            const url = '/api/Usuarios/' + props.id;
+            const url = '/api/Usuarios/' + props.email;
             fetch(url).then(
                 (result) => {
                     result.json().then((data) => {
@@ -91,7 +91,7 @@ export default function PerfilAtualizacao(props) {
         <Modal size="md" centered show={modalShow}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Modal.Header>
-                    <Modal.Title>Atualização de Perfil - {props.id} </Modal.Title>
+                    <Modal.Title>Atualização de Perfil - {props.email} </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <label className="row mx-2">

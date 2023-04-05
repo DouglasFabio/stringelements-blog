@@ -2,7 +2,7 @@
 import { useEffect } from "react"
 import { createContext } from "react"
 import { useState } from "react"
-import { Button, Stack, Table } from "react-bootstrap"
+import { Alert, Button, Dropdown, Stack, Table } from "react-bootstrap"
 import PerfilAtualizacao from "./atualizarperfil"
 import { BsPencilSquare } from "react-icons/bs";
 
@@ -36,7 +36,12 @@ export default function Page() {
                         <td>{p.email}</td>
                         <td>{p.dtnascimento}</td>
                         <td>
-                            <Button variant="btn btn-primary col-6 bg-black" onClick={() => setOperacao({ id: p.id, action: "update" })}><BsPencilSquare/></Button>
+                            <Dropdown>
+                                <Dropdown.Toggle>Opção</Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={() => setOperacao({ id: p.email, action: "update" })}>Atualizar</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                         </td>
                     </tr>
                 );
@@ -59,6 +64,7 @@ export default function Page() {
         <>
             <Stack gap={2} className="col-md-5 mx-auto" >
             <p></p>
+            <Alert variant="secondary"><Alert.Heading>Atualizar perfil:</Alert.Heading></Alert>
             <AtualizarPerfilContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
                 {modal}
             </AtualizarPerfilContext.Provider>
@@ -66,9 +72,9 @@ export default function Page() {
             <Table striped hover>
                 <thead>
                     <tr>
-                        <th>NOME</th>
-                        <th>DATA DE NASCIMENTO</th>
-                        <th>EDITAR</th>
+                        <th><b>NOME</b></th>
+                        <th><b>DATA DE NASCIMENTO</b></th>
+                        <th><b>EDITAR</b></th>
                     </tr>
                 </thead>
                 <tbody>
