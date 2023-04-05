@@ -20,7 +20,7 @@ export default function CadastroAutor() {
   const onSubmit = (data) => {
       setBusy(true);
       
-      const url = '/api/Usuarios';
+      const url = '/api/Autores';
 
       var args = {
           method: 'POST',

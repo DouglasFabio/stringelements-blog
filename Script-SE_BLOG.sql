@@ -30,8 +30,8 @@ DTAltSenha datetime
 CREATE TABLE TB_Autores(
 
 IDAutor int primary key identity NOT NULL,
-ApelidoAutor varchar(25) NOT NULL,
-SenhaProvisoria varchar(max) NOT NULL,
+ApelidoAutor varchar(25),
+SenhaProvisoria varchar(max),
 CODUsuario int,
 FOREIGN KEY (CODUsuario) REFERENCES TB_Usuarios(IDUsuario)
 )
