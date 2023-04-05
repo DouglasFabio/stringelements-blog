@@ -79,15 +79,12 @@ export default function CadastroAdmin() {
               <label htmlFor="emailAdmin">Email:</label>
           </div>
           <div className="form-floating mt-2">
-              <input type="password" className="form-control" id="senhaADM" {...register("senha")}
+              <input type="password" className="form-control" id="senhaAdmin" {...register("senha")}
                   placeholder="Senha" name="senha" />
               <span className='text-danger'>{errors.senha?.message}</span>
-              <label htmlFor="senhaADM">Senha:</label>
+              <label htmlFor="senhaAdmin">Senha:</label>
           </div>
           <div className="form-floating mt-1" hidden>
-              <input type="text" name="codAtivacao" value="" {...register("codAtivacao")}  />
-              <input type="text" name="statusSenha" value="V" {...register("statusSenha")}  />
-              <input type="text" name="statusConta" value="V" {...register("statusConta")}  />
               <input type="text" name="tipoUsuario" value="M" {...register("tipoUsuario")}  />
           </div>
           <BusyButton variant="btn btn-primary mt-3 col-12 bg-black" type="submit" label="Cadastrar" busy={busy}/>

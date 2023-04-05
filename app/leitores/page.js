@@ -90,9 +90,6 @@ export default function CadastroLeitor() {
           <label htmlFor="senhaLeitor">Senha Leitor:</label>
         </div>
         <div className="form-floating mt-1" hidden>
-            <input type="text" name="codAtivacao" {...register("codAtivacao")} />
-            <input type="text" name="statusSenha" value="N" {...register("statusSenha")}  />
-            <input type="text" name="statusConta" value="N" {...register("statusConta")}  />
             <input type="text" name="tipoUsuario" value="L" {...register("tipoUsuario")}  />
         </div>
         <BusyButton variant="btn btn-primary mt-3 col-12 bg-black" type="submit" label="Cadastrar" busy={busy}/>
