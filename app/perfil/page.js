@@ -39,7 +39,7 @@ export default function Page() {
                             <Dropdown>
                                 <Dropdown.Toggle>Opção</Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => setOperacao({ id: p.email, action: "update" })}>Atualizar</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setOperacao({ id: p.email, action: "update" })}><BsPencilSquare/> Atualizar</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </td>
@@ -72,7 +72,7 @@ export default function Page() {
             <Table striped hover>
                 <thead>
                     <tr>
-                        <th><b>NOME</b></th>
+                        <th><b>EMAIL</b></th>
                         <th><b>DATA DE NASCIMENTO</b></th>
                         <th><b>EDITAR</b></th>
                     </tr>
