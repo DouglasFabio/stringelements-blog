@@ -91,6 +91,7 @@ export default function CadastroLeitor() {
         </div>
         <div className="form-floating mt-1" hidden>
             <input type="text" name="tipoUsuario" value="L" {...register("tipoUsuario")}  />
+            <input type="text" name="codAtivacao" value="L" {...register("codAtivacao")}  />
         </div>
         <BusyButton variant="btn btn-primary mt-3 col-12 bg-black" type="submit" label="Cadastrar" busy={busy}/>
         <div className="btn btn-primary mt-2 col-12 text-white bg-black" htmlFor="voltar"><Link href="/" passHref legacyBehavior>Voltar</Link></div>
