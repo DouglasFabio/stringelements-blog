@@ -1,6 +1,5 @@
 'use client'
 import BusyButton from "@/app/componentes/BusyButton";
-import NavBar from "@/app/componentes/NavBar";
 import { MessageCallbackContext } from "@/app/layout";
 import { schemaAutor } from "@/app/schemas/validacaoForm";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -62,7 +61,6 @@ export default function CadastrarAutor(){
   }
     return(
         <>
-        <head><NavBar modo="adm"/></head>
         <Stack gap={2} className="col-md-5 mx-auto">
         <p></p>
         <Alert variant="secondary"><Alert.Heading>Cadastro de Autores:</Alert.Heading></Alert>
