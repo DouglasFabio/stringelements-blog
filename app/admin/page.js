@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import { schemaAdmin } from '../schemas/validacaoForm';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BusyButton from '../componentes/BusyButton';
-import Admin from './layout';
 
 export default function CadastroAdmin() {
 
@@ -61,7 +60,6 @@ export default function CadastroAdmin() {
   }
 
   return (
-    <Admin>
       <Stack gap={2} className="col-md-5 mx-auto" >
         <p></p>
         <Alert variant="secondary"><Alert.Heading>Bem-vindo{'(a)'}! Por favor, cadastre um administrador do sistema:</Alert.Heading></Alert>
@@ -90,6 +88,5 @@ export default function CadastroAdmin() {
           <BusyButton variant="btn btn-primary mt-3 col-12 bg-black" type="submit" label="Cadastrar" busy={busy}/>
         </form>
       </Stack>
-    </Admin>
   );
 }
