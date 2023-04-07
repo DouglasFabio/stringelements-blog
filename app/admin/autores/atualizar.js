@@ -28,7 +28,7 @@ export default function AtualizarAutor(props) {
     const onSubmit = (data) => {
         setBusy(true);
 
-        data.id = props.id;
+        data.idusuario = props.id;
 
         const url = '/api/Autores/' + props.id;
         var args = {
@@ -66,7 +66,7 @@ export default function AtualizarAutor(props) {
 
     useEffect(() => {
         if (modalShow === false) {
-            reset({ nome: ''})
+            reset({ nome: '' })
         }
     }, [modalShow]);
 
@@ -74,19 +74,18 @@ export default function AtualizarAutor(props) {
         if (primeiroAcesso === null)
             setPrimeiroAcesso(true);
 
-        if (primeiroAcesso) {
-            setPrimeiroAcesso(false);
-            const url = '/api/Autores/' + props.id;
-            fetch(url).then(
-                (result) => {
-                    result.json().then((data) => {
-                        reset({ nome: data.nome, tipo: data.tipoUsuario });
-                    })
-                }
-            );
-        }
-    }, [primeiroAcesso]);
-
+            if (primeiroAcesso) {
+                setPrimeiroAcesso(false);
+                const url = '/api/tipocurso/' + props.id;
+                fetch(url).then(
+                    (result) => {
+                        result.json().then((data) => {
+                            reset({ nome: data.nome });
+                        })
+                    }
+                );
+            }
+        }, [primeiroAcesso]);
     return (
         <Modal size="md" centered show={modalShow}>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -102,8 +101,8 @@ export default function AtualizarAutor(props) {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <BusyButton variant="btn btn-primary mt-3 col-6 bg-black" type="submit" label="Atualizar" busy={busy}/>
-                    <Button variant="secondary" onClick={handleClose}>Fechar</Button>
+                    <BusyButton variant="btn btn-primary mt-2 col-6 bg-black" type="submit" label="Atualizar" busy={busy}/>
+                    <Button variant="secondary mt-2 col-4" onClick={handleClose}>Fechar</Button>
                 </Modal.Footer>
             </form>
         </Modal>

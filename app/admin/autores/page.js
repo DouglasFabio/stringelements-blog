@@ -4,7 +4,7 @@ import { createContext } from "react"
 import { useState } from "react"
 import { Alert, Button, Dropdown, Stack, Table } from "react-bootstrap"
 import CadastrarAutor from "./cadastrarautor";
-import { BsPencilSquare } from "react-icons/bs";
+import { BsPencilSquare, BsPersonAdd } from "react-icons/bs";
 import AtualizarAutor from "./atualizar"
 
 export const metadata = {
@@ -24,9 +24,12 @@ export default function Page() {
     let modalUpdate = null;
 
     if(operacao.action === "create"){
-        modalCreate = <CadastrarAutor id={operacao.id}/>
+        modalCreate = <CadastrarAutor/>
     }else if(operacao.action === "update"){
         modalUpdate = <AtualizarAutor id={operacao.id}/>
+    }else{
+        modalCreate = null;
+        modalUpdate = null;
     }
 
     const fecharModals = () => {
@@ -34,18 +37,20 @@ export default function Page() {
     }
 
     const pesquisar = () => {
-        fetch('/api/Usuarios').then((result) => {
+        fetch('/api/Autores').then((result) => {
             result.json().then((data) => {
+                let i = 0;
                 let finalGrid = data.map((p) =>
-                    <tr key={p.id}>
-                        <td></td>
+                    <tr key={p.idusuario}>
+                        <td><b>{i+=1}</b></td>
                         <td>{p.nome}</td>
-                        <td>{p.tipoUsuario}</td>
+                        <td>{p.apelidoAutor}</td>
+                        <td>{p.statusConta}</td>
                         <td>
                             <Dropdown>
                                 <Dropdown.Toggle>Opção</Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => setOperacao({ id: p.id, action: "update" })}><BsPencilSquare/>Atualizar</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "update" })}><BsPencilSquare/>Editar Nome</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </td>
@@ -60,9 +65,11 @@ export default function Page() {
     useEffect(() => {
         if (atualizarGrid === null)
             setAtualizarGrid(true);
+            modalCreate = false;
+            modalUpdate = false;
         if (atualizarGrid) {
             setAtualizarGrid(false);
-            pesquisar();
+            pesquisar();  
         }
     }, [atualizarGrid])
 
@@ -71,27 +78,32 @@ export default function Page() {
       <Stack gap={2} className="col-md-5 mx-auto">
         <p></p>
         <CadastrarAutorContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
+          
           {modalCreate}
         </CadastrarAutorContext.Provider>
         <AtualizarAutorContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
-          {modalUpdate}
-        </AtualizarAutorContext.Provider>
+          
+         
         <div>
-          <Alert variant="secondary"><Button variant="success" onClick={() => setOperacao({ action: "create" })}>CADASTRAR AUTOR</Button></Alert>
-          <Table responsive="md" striped bordered hover>
-            <thead>
+          <Alert variant="secondary"><Alert.Heading>Gerenciamento de Autores:</Alert.Heading></Alert>
+          <Button variant="success" onClick={() => setOperacao({ action: "create" })} style={{float: 'right', margin: 5}} title="CADASTRAR"><BsPersonAdd size={20}/></Button>
+          <Table responsive="md" className="table table-hover">
+            <thead className="thead-dark">
               <tr>
                 <th><b>#</b></th>
                 <th><b>NOME</b></th>
-                <th><b>TIPO</b></th>
+                <th><b>APELIDO</b></th>
+                <th><b>STATUS</b></th>
                 <th><b>GERENCIAR</b></th>
               </tr>
             </thead>
             <tbody>
               {gridAutores}
             </tbody>
-          </Table>
+          </Table> 
         </div>
+        {modalUpdate}
+        </AtualizarAutorContext.Provider>
       </Stack>
     </>
   );
