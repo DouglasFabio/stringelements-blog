@@ -24,16 +24,9 @@ StatusSenha varchar(1),
 StatusConta varchar(1),
 TipoUsuario varchar(1),
 CodSenha varchar(max),
-DTAltSenha datetime
-)
-
-CREATE TABLE TB_Autores(
-
-IDAutor int primary key identity NOT NULL,
+DTAltSenha datetime,
 ApelidoAutor varchar(25),
-SenhaProvisoria varchar(max),
-CODUsuario int,
-FOREIGN KEY (CODUsuario) REFERENCES TB_Usuarios(IDUsuario)
+CODNoticia int
 )
 
 CREATE TABLE TB_Noticias(
@@ -50,7 +43,7 @@ Texto varchar(max) NOT NULL,
 Situacao varchar(1) NOT NULL,
 DataAlteracao date,
 CODAutor int,
-FOREIGN KEY (CODAutor) REFERENCES TB_Autores(IDAutor)
+FOREIGN KEY (CODAutor) REFERENCES TB_Usuarios(IDUsuario)
 )
 
 CREATE TABLE TB_StatusNoticias(

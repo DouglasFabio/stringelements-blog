@@ -83,6 +83,7 @@ export default function ResetSenha() {
               <label htmlFor="emailLeitor">Email:</label>
         </div>
         <div className="form-floating mt-1" hidden>
+            <input type="text" name="senha" {...register("senha")} />
             <input type="text" name="codSenha" {...register("codSenha")} />
             <input type="text" name="nome" value="" {...register("nome")} />
         </div>
