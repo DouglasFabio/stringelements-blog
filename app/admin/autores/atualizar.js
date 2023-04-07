@@ -76,7 +76,7 @@ export default function AtualizarAutor(props) {
 
             if (primeiroAcesso) {
                 setPrimeiroAcesso(false);
-                const url = '/api/tipocurso/' + props.id;
+                const url = '/api/Autores/' + props.id;
                 fetch(url).then(
                     (result) => {
                         result.json().then((data) => {

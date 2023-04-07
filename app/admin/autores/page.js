@@ -78,7 +78,6 @@ export default function Page() {
       <Stack gap={2} className="col-md-5 mx-auto">
         <p></p>
         <CadastrarAutorContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
-          
           {modalCreate}
         </CadastrarAutorContext.Provider>
         <AtualizarAutorContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
@@ -86,7 +85,7 @@ export default function Page() {
          
         <div>
           <Alert variant="secondary"><Alert.Heading>Gerenciamento de Autores:</Alert.Heading></Alert>
-          <Button variant="success" onClick={() => setOperacao({ action: "create" })} style={{float: 'right', margin: 5}} title="CADASTRAR"><BsPersonAdd size={20}/></Button>
+          <Button variant="success" onClick={() => setOperacao({id: null, action: "create" })} style={{float: 'right', margin: 5}} title="CADASTRAR"><BsPersonAdd size={20}/></Button>
           <Table responsive="md" className="table table-hover">
             <thead className="thead-dark">
               <tr>
@@ -100,9 +99,10 @@ export default function Page() {
             <tbody>
               {gridAutores}
             </tbody>
-          </Table> 
+          </Table>
+          
         </div>
-        {modalUpdate}
+         {modalUpdate}
         </AtualizarAutorContext.Provider>
       </Stack>
     </>
