@@ -4,7 +4,7 @@ import { createContext } from "react"
 import { useState } from "react"
 import { Alert, Button, Dropdown, Stack, Table } from "react-bootstrap"
 import CadastrarAutor from "./cadastrarautor";
-import { BsPencilSquare, BsPersonAdd } from "react-icons/bs";
+import { BsFillPersonXFill, BsPencilSquare, BsPersonAdd, BsXCircle } from "react-icons/bs";
 import AtualizarAutor from "./atualizar"
 
 export const metadata = {
@@ -27,10 +27,14 @@ export default function Page() {
         modalCreate = <CadastrarAutor/>
     }else if(operacao.action === "update"){
         modalUpdate = <AtualizarAutor id={operacao.id}/>
+    }else if(operacao.action === "updateStatusConta"){
+        modalUpdateStatusConta = <AtualizarStatusConta id={operacao.id}/>
+    }else if(operacao.action === "delete"){
+      modalDelete = <DeletarAutor id={operacao.id}/>
     }else{
-        modalCreate = null;
-        modalUpdate = null;
-    }
+      modalCreate = null;
+      modalUpdate = null;
+  }
 
     const fecharModals = () => {
         setOperacao({id:null, action:null});
@@ -50,7 +54,9 @@ export default function Page() {
                             <Dropdown>
                                 <Dropdown.Toggle>Opção</Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "update" })}><BsPencilSquare/>Editar Nome</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "update" })}><BsPencilSquare/>  Editar Nome</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "updateStatusConta" })}><BsFillPersonXFill/>  Bloquear acesso</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "delete" })}><BsXCircle/>  Deletar autor</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </td>
@@ -79,7 +85,7 @@ export default function Page() {
         <p></p>
         <CadastrarAutorContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
           {modalCreate}
-        </CadastrarAutorContext.Provider>
+        
         <AtualizarAutorContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
           
          
@@ -104,6 +110,7 @@ export default function Page() {
         </div>
          {modalUpdate}
         </AtualizarAutorContext.Provider>
+        </CadastrarAutorContext.Provider>
       </Stack>
     </>
   );
