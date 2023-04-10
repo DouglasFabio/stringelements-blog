@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { createContext } from "react"
 import { useState } from "react"
 import { Alert, Button, Dropdown, Stack, Table } from "react-bootstrap"
-import CadastrarAutor from "./cadastrarautor";
+import CadastrarAutor from "./cadastrar";
 import { BsFillPersonXFill, BsPencilSquare, BsPersonAdd, BsXCircle } from "react-icons/bs";
 import AtualizarAutor from "./atualizar"
 import DeletarAutor from "./remover"
@@ -90,7 +90,9 @@ export default function Page() {
           {modalCreate}
         </CadastrarAutorContext.Provider>
         <AtualizarAutorContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
-          
+          {modalUpdate}
+          {modalDelete}
+        </AtualizarAutorContext.Provider>
          
         <div>
           <Alert variant="secondary"><Alert.Heading>Gerenciamento de Autores:</Alert.Heading></Alert>
@@ -111,9 +113,6 @@ export default function Page() {
           </Table>
           
         </div>
-         {modalUpdate}
-         {modalDelete}
-        </AtualizarAutorContext.Provider>
       </Stack>
     </>
   );
