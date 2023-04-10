@@ -6,6 +6,7 @@ import { Alert, Button, Dropdown, Stack, Table } from "react-bootstrap"
 import CadastrarAutor from "./cadastrarautor";
 import { BsFillPersonXFill, BsPencilSquare, BsPersonAdd, BsXCircle } from "react-icons/bs";
 import AtualizarAutor from "./atualizar"
+import DeletarAutor from "./remover"
 
 export const metadata = {
     title: 'Gerenciar Autores'
@@ -22,13 +23,14 @@ export default function Page() {
 
     let modalCreate = null;
     let modalUpdate = null;
+    let modalDelete = null;
 
     if(operacao.action === "create"){
         modalCreate = <CadastrarAutor/>
     }else if(operacao.action === "update"){
         modalUpdate = <AtualizarAutor id={operacao.id}/>
     }else if(operacao.action === "updateStatusConta"){
-        modalUpdateStatusConta = <AtualizarStatusConta id={operacao.id}/>
+        
     }else if(operacao.action === "delete"){
       modalDelete = <DeletarAutor id={operacao.id}/>
     }else{
@@ -71,8 +73,9 @@ export default function Page() {
     useEffect(() => {
         if (atualizarGrid === null)
             setAtualizarGrid(true);
-            modalCreate = false;
-            modalUpdate = false;
+            modalCreate = null;
+            modalUpdate = null;
+            modalDelete = null;
         if (atualizarGrid) {
             setAtualizarGrid(false);
             pesquisar();  
@@ -85,7 +88,7 @@ export default function Page() {
         <p></p>
         <CadastrarAutorContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
           {modalCreate}
-        
+        </CadastrarAutorContext.Provider>
         <AtualizarAutorContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
           
          
@@ -109,8 +112,8 @@ export default function Page() {
           
         </div>
          {modalUpdate}
+         {modalDelete}
         </AtualizarAutorContext.Provider>
-        </CadastrarAutorContext.Provider>
       </Stack>
     </>
   );

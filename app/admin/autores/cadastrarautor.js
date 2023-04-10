@@ -64,6 +64,7 @@ export default function CadastrarAutor() {
     }
 
     const handleClose = () => {
+        atualizarCallback.fechar();
         setModalShow(false);
     }
 

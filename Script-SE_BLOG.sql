@@ -25,8 +25,7 @@ StatusConta varchar(1),
 TipoUsuario varchar(1),
 CodSenha varchar(max),
 DTAltSenha datetime,
-ApelidoAutor varchar(25),
-CODNoticia int
+ApelidoAutor varchar(25)
 )
 
 CREATE TABLE TB_Noticias(
