@@ -7,6 +7,7 @@ import CadastrarAutor from "./cadastrar";
 import { BsFillPersonXFill, BsPencilSquare, BsPersonAdd, BsXCircle } from "react-icons/bs";
 import AtualizarAutor from "./atualizar"
 import DeletarAutor from "./remover"
+import BloquearAutor from "./bloquear"
 
 export const metadata = {
     title: 'Gerenciar Autores'
@@ -24,13 +25,14 @@ export default function Page() {
     let modalCreate = null;
     let modalUpdate = null;
     let modalDelete = null;
+    let modalBlock = null;
 
     if(operacao.action === "create"){
         modalCreate = <CadastrarAutor/>
     }else if(operacao.action === "update"){
         modalUpdate = <AtualizarAutor id={operacao.id}/>
     }else if(operacao.action === "updateStatusConta"){
-        
+        modalBlock = <BloquearAutor id={operacao.id}/>
     }else if(operacao.action === "delete"){
       modalDelete = <DeletarAutor id={operacao.id}/>
     }else{
@@ -92,6 +94,7 @@ export default function Page() {
         <AtualizarAutorContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
           {modalUpdate}
           {modalDelete}
+          {modalBlock}
         </AtualizarAutorContext.Provider>
          
         <div>

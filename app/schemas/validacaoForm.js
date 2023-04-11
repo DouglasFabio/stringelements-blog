@@ -85,3 +85,10 @@ export const schemaAutor = yup.object({
     .max(50, 'O apelido deve conter, no máximo, 50 caracteres')
     .required('O apelido é obrigatório')
 }).required();
+
+export const schemaAtualizaAutor = yup.object({
+  nome: yup.string()
+    .min(1, 'O nome deve conter, no mínimo, 3 caracteres')
+    .max(50, 'O nome deve conter, no máximo, 50 caracteres')
+    .required('O nome é obrigatório')
+  }).required();

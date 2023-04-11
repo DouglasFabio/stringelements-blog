@@ -3,10 +3,11 @@ import { Button, Modal } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { MessageCallbackContext } from "../layout";
-import { AtualizarSenhaContext } from "./page";
+
 import { schemaNovaSenha } from "../schemas/validacaoForm";
 import BusyButton from "../componentes/BusyButton";
+import { MessageCallbackContext } from "../layout";
+import { AtualizarSenhaContext } from "./page";
 
 
 export default function AtualizarSenha() {
@@ -40,7 +41,6 @@ export default function AtualizarSenha() {
                 
                 if (result.status == 200) {
                     //ações em caso de sucesso
-                    atualizarCallback.atualizar(true);
                     messageCallback({ tipo: 'sucesso', texto: resultData });
                     handleClose();
                 }

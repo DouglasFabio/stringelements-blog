@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AtualizarAutorContext } from "./page";
 import BusyButton from "@/app/componentes/BusyButton";
-import { schemaAutor } from "@/app/schemas/validacaoForm";
 import { MessageCallbackContext } from "@/app/layout";
+import { schemaAtualizaAutor } from "@/app/schemas/validacaoForm";
 
 export default function AtualizarAutor(props) {
 
@@ -17,7 +17,7 @@ export default function AtualizarAutor(props) {
     const atualizarCallback = useContext(AtualizarAutorContext);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
-        resolver: yupResolver(schemaAutor)
+        resolver: yupResolver(schemaAtualizaAutor)
     });
 
     const handleClose = () => {
@@ -26,6 +26,7 @@ export default function AtualizarAutor(props) {
     }
 
     const onSubmit = (data) => {
+
         setBusy(true);
 
         data.idusuario = props.id;
@@ -98,6 +99,12 @@ export default function AtualizarAutor(props) {
                         placeholder="Nome Autor"  name="nome" />
                         <span className='text-danger'>{errors.nome?.message}</span>
                         <label htmlFor="nomeAutor">Nome Autor:</label>
+                    </div>
+                    <div className="form-floating" hidden>
+                        <input type="email" className="form-control" id="emailAutor" {...register("email")}
+                            placeholder="Email Autor"  name="email" />
+                        <input type="password" className="form-control" id="emailAutor" {...register("senha")}
+                            placeholder="Senha Autor"  name="senha" />
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
