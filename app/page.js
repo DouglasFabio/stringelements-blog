@@ -1,39 +1,64 @@
 'use client'
-import { Badge, Stack } from "react-bootstrap";
-import NavBar from "./componentes/NavBar";
 
-export default function Noticias(){
+import NavBar from "@/app/componentes/NavBar";
+import Link from "next/link";
+import { createContext, useEffect, useState } from "react";
+import {  Badge, Stack } from "react-bootstrap";
+
+export const metadata = {
+    title: 'Home'
+}
+
+export const CadastrarNoticiaContext = createContext(null);
+export const AtualizarNoticiaContext = createContext(null);
+
+export async function getStaticProps(){
+    const data = await fetch('http://localhost:5000/api/NoticiasPublicadas')
+
+    const noticias = await data.json()
+
+    return {
+        props: { noticias },
+    }
+}
+
+export default function Noticias({noticias}) {
+
+    const [gridNoticias, setGridNoticias] = useState(null);
+    const [atualizarGrid, setAtualizarGrid] = useState(null);
+
+    const pesquisar = () => {
+        fetch('/api/NoticiasPublicadas/').then((result) => {
+            result.json().then((data) => {
+                let finalGrid = data.map((p) =>
+                    <div className="container-md" key={p.idnoticia}>
+                        <hr/>
+                        <h3><p className="text-bold">{p.dataPublicacao}</p><Link href={`/noticias/${p.idnoticia}`} legacyBehavior>{p.titulo}</Link><Badge bg="secondary">New</Badge></h3>
+                        <h5>{p.subtitulo}</h5>      
+                    </div>
+                );
+                setGridNoticias(finalGrid);
+            })
+        }
+        );
+    }
+
+    useEffect(() => {
+        if (atualizarGrid === null)
+            setAtualizarGrid(true);
+        if (atualizarGrid) {
+            setAtualizarGrid(false);
+            pesquisar();  
+        }
+    }, [atualizarGrid])
+
     return(
         <>
             <NavBar modo="semLogin"/>
-            <Stack gap="1">
-                <p></p> 
-                <div className="container-md">
-                    <hr/>
-                    <h3><p className="text-bold">28-03-2023</p>Título Notícia <Badge bg="secondary">New</Badge></h3>
-                    <h5>Subtítulo Noticia</h5>
-                    <p>
-                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                        The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, 
-                        content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as 
-                        their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have 
-                        evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                    </p>
-                    
-                </div>
-                <div className="container-md">
-                    <hr/>
-                    <h3><p className="text-bold">04/03/2023</p>Título Notícia <Badge bg="secondary">New</Badge></h3>
-                    <h5>Subtítulo Noticia</h5>
-                    <p>
-                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                        The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, 
-                        content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as 
-                        their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have 
-                        evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                    </p>
-                </div>
-            </Stack>
+                <Stack gap={2} className="col-md-5 mx-auto">
+                    <p></p>
+                    {gridNoticias}
+                </Stack>
         </>
-    );
+  );
 }
