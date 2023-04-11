@@ -92,3 +92,13 @@ export const schemaAtualizaAutor = yup.object({
     .max(50, 'O nome deve conter, no máximo, 50 caracteres')
     .required('O nome é obrigatório')
   }).required();
+
+  export const schemaAtualizaPerfil = yup.object({
+    email: yup.string()
+    .email('Utilize um email válido: exemplo@email.com')
+    .min(5, 'O email deve conter, no mínimo, 5 caracteres')
+    .max(50, 'O email deve conter, no máximo, 50 caracteres')
+    .required('O email é obrigatório'),
+  dtnascimento: yup.string()
+    .required('A data de nascimento é obrigatória')
+    }).required();

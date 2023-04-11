@@ -39,7 +39,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <>
-            <NavBar modo="semLogin"/>
             <MessageCallbackContext.Provider value={handleMessageCallback}>
               {children}
               <Footer/>

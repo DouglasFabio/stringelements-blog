@@ -31,8 +31,10 @@ export default function Page() {
     const pesquisar = () => {
         fetch('/api/Usuarios').then((result) => {
             result.json().then((data) => {
+                let i = 1;
                 let finalGrid = data.map((p) =>
-                    <tr key={p.id}>
+                    <tr key={p.idusuario}>
+                        <td>{i++}</td>
                         <td>{p.email}</td>
                         <td>{p.dtnascimento}</td>
                         <td>
@@ -67,11 +69,12 @@ export default function Page() {
             <Alert variant="secondary"><Alert.Heading>Atualizar perfil:</Alert.Heading></Alert>
             <AtualizarPerfilContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
                 {modal}
-            </AtualizarPerfilContext.Provider>
+           
 
             <Table striped hover>
                 <thead>
                     <tr>
+                        <th><b>#</b></th>
                         <th><b>EMAIL</b></th>
                         <th><b>DATA DE NASCIMENTO</b></th>
                         <th><b>EDITAR</b></th>
@@ -81,6 +84,7 @@ export default function Page() {
                     {grid}
                 </tbody>
             </Table>
+            </AtualizarPerfilContext.Provider>
             </Stack>
         </>
     )

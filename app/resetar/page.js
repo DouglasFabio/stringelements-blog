@@ -8,6 +8,7 @@ import { schemaResetSenha } from '../schemas/validacaoForm';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BusyButton from '../componentes/BusyButton';
 import AtualizarSenha from './atualizarsenha';
+import NavBar from '../componentes/NavBar';
 
 export const AtualizarSenhaContext = createContext(null);
 
@@ -72,6 +73,8 @@ export default function ResetSenha() {
 }
 
   return (
+    <>
+    <NavBar modo="semLogin"/>
     <Stack gap={2} className="col-md-5 mx-auto" >
       <p></p>
       <Alert variant="secondary"><Alert.Heading>Digite o email cadastrado para receber o código:</Alert.Heading></Alert>
@@ -95,5 +98,6 @@ export default function ResetSenha() {
         {modal}
       </AtualizarSenhaContext.Provider>
     </Stack>
+    </>
   );
 }

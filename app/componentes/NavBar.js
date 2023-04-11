@@ -70,12 +70,12 @@ export default function NavBar(props) {
                                 </Nav.Link>
                             </Link>
                             <NavDropdown title="Cadastrar">
-                                <Link href="/admin/autor" passHref legacyBehavior>
+                                <Link href="/admin/autores" passHref legacyBehavior>
                                     <NavDropdown.Item>Autor</NavDropdown.Item>
                                 </Link>
                             </NavDropdown>
                             <NavDropdown title="Gerenciamento">
-                                <Link href="/" passHref legacyBehavior>
+                                <Link href="/admin/usuarios" passHref legacyBehavior>
                                     <NavDropdown.Item>Listar Usuários</NavDropdown.Item>
                                 </Link>
                             </NavDropdown>

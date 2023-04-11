@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Alert, Stack } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import NavBar from '../componentes/NavBar';
 
 export default function Login() {
 
@@ -20,6 +21,8 @@ export default function Login() {
   }
 
   return (
+    <>
+    <NavBar modo="semLogin"/>
     <Stack gap={2} className="col-md-5 mx-auto" >
       <p></p>
       <Alert variant="secondary"><Alert.Heading>Bem-vindo{'(a)'}! Por favor, realize seu login no sistema:</Alert.Heading></Alert>
@@ -38,5 +41,6 @@ export default function Login() {
         <Link href="/resetar" passHref legacyBehavior>Esqueceu sua senha?</Link>
       </form>
     </Stack>
+    </>
   );
 }

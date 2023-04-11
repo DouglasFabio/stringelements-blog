@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MessageCallbackContext } from "../layout";
 import { AtualizarPerfilContext } from "./page";
-import { schemaUsuario } from "../schemas/validacaoForm";
+import { schemaAtualizaPerfil } from "../schemas/validacaoForm";
 import BusyButton from "../componentes/BusyButton";
 
 export default function PerfilAtualizacao(props) {
@@ -17,7 +17,7 @@ export default function PerfilAtualizacao(props) {
     const atualizarCallback = useContext(AtualizarPerfilContext);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
-        resolver: yupResolver(schemaUsuario)
+        resolver: yupResolver(schemaAtualizaPerfil)
     });
 
     const handleClose = () => {
@@ -26,11 +26,12 @@ export default function PerfilAtualizacao(props) {
     }
 
     const onSubmit = (data) => {
+
         setBusy(true);
 
-        data.email = props.email;
+        data.idusuario = props.id;
 
-        const url = '/api/Usuarios/' + props.email;
+        const url = '/api/Usuarios/' + props.id;
         var args = {
             method: 'PUT',
             headers: {
@@ -64,6 +65,7 @@ export default function PerfilAtualizacao(props) {
         });
     }
 
+
     useEffect(() => {
         if (modalShow === false) {
             reset({ email: '', dtnascimento: '' })
@@ -76,7 +78,7 @@ export default function PerfilAtualizacao(props) {
 
         if (primeiroAcesso) {
             setPrimeiroAcesso(false);
-            const url = '/api/Usuarios/' + props.email;
+            const url = '/api/Usuarios/' + props.id;
             fetch(url).then(
                 (result) => {
                     result.json().then((data) => {
@@ -91,7 +93,7 @@ export default function PerfilAtualizacao(props) {
         <Modal size="md" centered show={modalShow}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Modal.Header>
-                    <Modal.Title>Atualização de Perfil - {props.email} </Modal.Title>
+                    <Modal.Title>Atualização de Perfil - {props.id} </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <label className="row mx-2">
@@ -104,6 +106,12 @@ export default function PerfilAtualizacao(props) {
                         <input type="date" className="form-control" maxLength={10} name="dtnascimento" {...register("dtnascimento")} />
                         <span className='text-danger'>{errors.dtnascimento?.message}</span>
                     </label>
+                    <div className="form-floating" hidden>
+                        <input type="email" className="form-control" id="nomeAutor" {...register("nome")}
+                            placeholder="Email "  name="email" />
+                        <input type="password" className="form-control" id="emailAutor" {...register("senha")}
+                            placeholder="Senha "  name="senha" />
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <BusyButton variant="success" type="submit" label="Salvar" busy={busy} />

@@ -8,6 +8,7 @@ import { BsFillPersonXFill, BsPencilSquare, BsPersonAdd, BsXCircle } from "react
 import AtualizarAutor from "./atualizar"
 import DeletarAutor from "./remover"
 import BloquearAutor from "./bloquear"
+import NavBar from "@/app/componentes/NavBar"
 
 export const metadata = {
     title: 'Gerenciar Autores'
@@ -86,6 +87,7 @@ export default function Page() {
 
   return (
     <>
+      <NavBar modo="loginADM"/>
       <Stack gap={2} className="col-md-5 mx-auto">
         <p></p>
         <CadastrarAutorContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
