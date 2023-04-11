@@ -102,3 +102,43 @@ export const schemaAtualizaAutor = yup.object({
   dtnascimento: yup.string()
     .required('A data de nascimento é obrigatória')
     }).required();
+
+export const schemaNoticia = yup.object({
+  titulo: yup.string()
+    .min(3, 'O título deve conter, no mínimo, 3 caracteres')
+    .max(25, 'O título deve conter, no máximo, 25 caracteres')
+    .required('O título é obrigatório'),
+  subtitulo: yup.string()
+    .min(3, 'O subtítulo deve conter, no mínimo, 3 caracteres')
+    .max(50, 'O subtítulo deve conter, no máximo, 50 caracteres')
+    .required('O subtítulo é obrigatório'),
+  texto: yup.string()
+    .min(5, 'O conteúdo deve conter, no mínimo, 5 caracteres')
+    .max(500, 'O conteúdo deve conter, no máximo, 500 caracteres')
+    .required('O conteúdo é obrigatório'),
+  datapublicacao: yup.string()
+    .required('A data de publicação é obrigatória'),
+  situacao: yup.string()
+    .required('A situação é obrigatória')
+}).required();
+
+export const schemaAtualizaNoticia = yup.object({
+  titulo: yup.string()
+    .min(3, 'O título deve conter, no mínimo, 3 caracteres')
+    .max(25, 'O título deve conter, no máximo, 25 caracteres')
+    .required('O título é obrigatório'),
+  subtitulo: yup.string()
+    .min(3, 'O subtítulo deve conter, no mínimo, 3 caracteres')
+    .max(50, 'O subtítulo deve conter, no máximo, 50 caracteres')
+    .required('O subtítulo é obrigatório'),
+  texto: yup.string()
+    .min(5, 'O conteúdo deve conter, no mínimo, 5 caracteres')
+    .max(500, 'O conteúdo deve conter, no máximo, 500 caracteres')
+    .required('O conteúdo é obrigatório'),
+  datapublicacao: yup.string()
+    .required('A data de publicação é obrigatória'),
+  dataalteracao: yup.string()
+    .required('A data de alteração é obrigatória'),
+  situacao: yup.string()
+    .required('A situação é obrigatória')
+}).required();

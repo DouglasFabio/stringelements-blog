@@ -36,7 +36,7 @@ CREATE TABLE TB_Noticias(
 
 IDNoticia int primary key identity NOT NULL,
 Titulo varchar(25) NOT NULL,
-SubTitulo varchar(50) NOT NULL,
+Subtitulo varchar(50) NOT NULL,
 DataPublicacao date	NOT NULL,
 Texto varchar(max) NOT NULL,
 Situacao varchar(1) NOT NULL,

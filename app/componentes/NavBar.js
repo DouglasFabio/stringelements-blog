@@ -152,14 +152,14 @@ export default function NavBar(props) {
                                     Inicio
                                 </Nav.Link>
                             </Link>
-                            <NavDropdown title="Cadastrar">
-                                <Link href="/noticias/cadastrar" passHref legacyBehavior>
-                                    <NavDropdown.Item>Nova Notícia</NavDropdown.Item>
+                            <NavDropdown title="Perfil">
+                                <Link href="/perfil" passHref legacyBehavior>
+                                    <NavDropdown.Item>Editar Perfil</NavDropdown.Item>
                                 </Link>
                             </NavDropdown>
                             <NavDropdown title="Gerenciamento">
-                                <Link href="/" passHref legacyBehavior>
-                                    <NavDropdown.Item>Notícias pendentes</NavDropdown.Item>
+                                <Link href="/autores/noticias" passHref legacyBehavior>
+                                    <NavDropdown.Item>Notícias</NavDropdown.Item>
                                 </Link>
                             </NavDropdown>
                         </Nav>
