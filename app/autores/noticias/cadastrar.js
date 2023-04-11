@@ -99,8 +99,8 @@ export default function CadastrarNoticia() {
                         <span className='text-danger'>{errors.texto?.message}</span>
                     </div>
                     <div className="form-floating mt-1" hidden>
-                        <input type="date" name="datapublicacao" {...register("datapublicacao")} />
-                        <input type="text" name="situacao" {...register("situacao")} />
+                        <input type="date" name="datapublicacao" />
+                        <input type="text" name="situacao" value={"N"} {...register("situacao")} />
                     </div>
                 </Modal.Body>
                 <Modal.Footer>

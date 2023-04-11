@@ -103,7 +103,7 @@ export default function AtualizarAutor(props) {
                     <div className="form-floating" hidden>
                         <input type="email" className="form-control" id="emailAutor" {...register("email")}
                             placeholder="Email Autor"  name="email" />
-                        <input type="password" className="form-control" id="emailAutor" {...register("senha")}
+                        <input type="password" className="form-control" id="senhaAutor" {...register("senha")}
                             placeholder="Senha Autor"  name="senha" />
                     </div>
                 </Modal.Body>

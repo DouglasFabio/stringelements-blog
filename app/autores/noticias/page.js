@@ -6,6 +6,7 @@ import { Alert, Button, Dropdown, Stack, Table } from "react-bootstrap";
 import { BsFileEarmarkCheck, BsFillFileTextFill, BsPencilSquare, BsXCircle } from "react-icons/bs";
 import AtualizarNoticia from "./atualizar";
 import CadastrarNoticia from "./cadastrar";
+import DeletarNoticia from "./remover";
 
 export const metadata = {
     title: 'Gerenciar Notícias'
@@ -53,9 +54,9 @@ export default function Page() {
                             <Dropdown>
                                 <Dropdown.Toggle>Opção</Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "update" })}><BsPencilSquare/>  Editar</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "updateSituacao" })}><BsFileEarmarkCheck/>  PUBLICAR</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "delete" })}><BsXCircle/>  Deletar notícia</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idnoticia, action: "update" })}><BsPencilSquare/>  Editar</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idnoticia, action: "updateSituacao" })}><BsFileEarmarkCheck/>  PUBLICAR</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idnoticia, action: "delete" })}><BsXCircle/>  Deletar notícia</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </td>
@@ -108,9 +109,9 @@ export default function Page() {
             <tbody>
               {gridNoticias}
             </tbody>
-          </Table>
-          
+          </Table>   
         </div>
+        
       </Stack>
     </>
   );

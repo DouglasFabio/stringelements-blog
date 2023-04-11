@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { AtualizarNoticiaContext } from "./page";
 import BusyButton from "@/app/componentes/BusyButton";
 import { MessageCallbackContext } from "@/app/layout";
-import { schemaAtualizaNoticia } from "@/app/schemas/validacaoForm";
+import { schemaNoticia } from "@/app/schemas/validacaoForm";
 
 export default function AtualizarNoticia(props) {
 
@@ -17,7 +17,7 @@ export default function AtualizarNoticia(props) {
     const atualizarCallback = useContext(AtualizarNoticiaContext);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
-        resolver: yupResolver(schemaAtualizaNoticia)
+        resolver: yupResolver(schemaNoticia)
     });
 
     const handleClose = () => {
@@ -29,7 +29,7 @@ export default function AtualizarNoticia(props) {
 
         setBusy(true);
 
-        data.idusuario = props.id;
+        data.idnoticia = props.id;
 
         const url = '/api/Noticias/' + props.id;
         var args = {
@@ -113,9 +113,7 @@ export default function AtualizarNoticia(props) {
                         <span className='text-danger'>{errors.texto?.message}</span>
                     </div>
                     <div className="form-floating mt-1" hidden>
-                        <input type="date" name="datapublicacao" {...register("datapublicacao")} />
-                        <input type="date" name="dataalteracao" {...register("dataalteracao")} />
-                        <input type="text" name="situacao" {...register("situacao")} />
+                        <input type="text" name="situacao" id="situacao" {...register("situacao")} />
                     </div>
                 </Modal.Body>
                 <Modal.Footer>

@@ -37,10 +37,10 @@ CREATE TABLE TB_Noticias(
 IDNoticia int primary key identity NOT NULL,
 Titulo varchar(25) NOT NULL,
 Subtitulo varchar(50) NOT NULL,
-DataPublicacao date	NOT NULL,
+DataPublicacao datetime,
 Texto varchar(max) NOT NULL,
 Situacao varchar(1) NOT NULL,
-DataAlteracao date,
+DataAlteracao datetime,
 CODAutor int,
 FOREIGN KEY (CODAutor) REFERENCES TB_Usuarios(IDUsuario)
 )
