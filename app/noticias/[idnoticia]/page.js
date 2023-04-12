@@ -3,45 +3,49 @@ import NavBar from "@/app/componentes/NavBar"
 import Link from "next/link"
 import { Stack } from "react-bootstrap"
 
-export async function getStaticProps(context){
-    const {params} = context
-
-    const data = await fetch(
-        `http://localhost:5000/api/NoticiasPublicadas/${params.idnoticia}`,
-    )
-
-    const noticia = await data.json()
+export async function getStaticProps({params}){
+    const noticia = await fetch(`http://localhost:5000/api/NoticiasPublicadas/${params.idnoticia}`)
+    .then((respostaDoServer) => {
+        if(respostaDoServer.ok){
+            return respostaDoServer.json();
+        }
+        throw new Error('Erro');
+    })
+    .then((respostaEmObjeto) => respostaEmObjeto);
 
     return {
-        props: {noticia},
-    }
+        props: {
+            noticia,
+        },
+    };
 }
 
 export async function getStaticPaths(){
-    
     const response = await fetch('http://localhost:5000/api/NoticiasPublicadas/')
     
     const data = await response.json()
 
-    const paths = data.map((noticia) => {
+    const paths = data.map((noticias) => {
         return {
             params: {
-                idnoticia: `${noticia.idnoticia}`,
+                idnoticia: `${noticias.idnoticia}`,
+                titulo: `${noticias.titulo}`,
             },
         }
     })
-    console.log(paths);
-    return {paths, fallback: true}
+
+    return {paths, fallback: false}
 }
 
-export default function Noticia({noticia}){
+export default function Noticia({params}){
+
     return (
         <>
             <NavBar modo="semLogin"/>
                 <Stack gap={2} className="col-md-5 mx-auto">
                     <p></p>
                     <Link href="/" passHref legacyBehavior>Voltar</Link>
-                    <h1>teste - {console.log({noticia})}</h1>
+                    <h1>teste - {console.log({params})}</h1>
                     <h2>{}</h2>
                     <h3>{}</h3>
                     <h4>Data Publicação</h4>
