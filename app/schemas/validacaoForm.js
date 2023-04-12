@@ -124,3 +124,17 @@ export const schemaVerificaLeitor = yup.object({
   codAtivacao: yup.string()
     .required('O código é obrigatório')
 }).required();
+
+export const schemaAutenticacaoAutor = yup.object({
+  senhaInicial: yup.string()
+    .required('A senha temporária é obrigatória'),
+  senha: yup.string()
+    .min(8, 'A senha deve conter, no mínimo, 8 caracteres')
+    .required('A senha é obrigatória')
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      'A senha precisa ter no mínimo 8 caracteres, ' +
+          'uma letra maiúscula e uma letra minúscula, ' +
+          'um número e um caracter especial'
+  )
+}).required();
