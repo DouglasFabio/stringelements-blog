@@ -45,7 +45,7 @@ export default function Noticia({params}){
                 <Stack gap={2} className="col-md-5 mx-auto">
                     <p></p>
                     <Link href="/" passHref legacyBehavior>Voltar</Link>
-                    <h1>teste - {console.log({params})}</h1>
+                    <h1>ID - {params.idnoticia}</h1>
                     <h2>{}</h2>
                     <h3>{}</h3>
                     <h4>Data Publicação</h4>
