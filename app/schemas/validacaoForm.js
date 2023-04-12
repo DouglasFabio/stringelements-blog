@@ -119,3 +119,8 @@ export const schemaNoticia = yup.object({
   situacao: yup.string()
     .required('A situação é obrigatória')
 }).required();
+
+export const schemaVerificaLeitor = yup.object({
+  codAtivacao: yup.string()
+    .required('O código é obrigatório')
+}).required();

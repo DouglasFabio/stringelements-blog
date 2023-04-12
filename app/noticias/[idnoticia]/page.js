@@ -28,8 +28,7 @@ export async function getStaticPaths(){
     const paths = data.map((noticias) => {
         return {
             params: {
-                idnoticia: `${noticias.idnoticia}`,
-                titulo: `${noticias.titulo}`,
+                titulo:  `${noticias.titulo}`, 
             },
         }
     })
@@ -44,9 +43,10 @@ export default function Noticia({params}){
             <NavBar modo="semLogin"/>
                 <Stack gap={2} className="col-md-5 mx-auto">
                     <p></p>
+                    {console.log({params})}
                     <Link href="/" passHref legacyBehavior>Voltar</Link>
-                    <h1>ID - {params.idnoticia}</h1>
-                    <h2>{}</h2>
+                    <h1 key={params.idnoticia}>ID - {params.idnoticia}</h1>
+                    <h2>{params.titulo}</h2>
                     <h3>{}</h3>
                     <h4>Data Publicação</h4>
                     <h5>Nome Autor</h5>

@@ -22,7 +22,7 @@ export async function getStaticProps(){
     }
 }
 
-export default function Noticias({noticias}) {
+export default function Noticias() {
 
     const [gridNoticias, setGridNoticias] = useState(null);
     const [atualizarGrid, setAtualizarGrid] = useState(null);
