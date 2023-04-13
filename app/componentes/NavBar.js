@@ -75,8 +75,11 @@ export default function NavBar(props) {
                                 </Link>
                             </NavDropdown>
                             <NavDropdown title="Gerenciamento">
-                                <Link href="/admin/usuarios" passHref legacyBehavior>
-                                    <NavDropdown.Item>Listar Usuários</NavDropdown.Item>
+                                <Link href="/admin/autores" passHref legacyBehavior>
+                                    <NavDropdown.Item>Listar Autores</NavDropdown.Item>
+                                </Link>
+                                <Link href="/admin/leitores" passHref legacyBehavior>
+                                    <NavDropdown.Item>Listar Leitores</NavDropdown.Item>
                                 </Link>
                             </NavDropdown>
                         </Nav>

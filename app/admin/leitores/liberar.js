@@ -1,23 +1,23 @@
 import { useEffect, useState, useContext } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import { MessageCallbackContext } from "../layout";
-import { AtualizarPerfilContext } from "./page";
-import { schemaAtualizaPerfil } from "../schemas/validacaoForm";
-import BusyButton from "../componentes/BusyButton";
+//import { yupResolver } from '@hookform/resolvers/yup';
+import { AtualizarLeitorContext } from "./page";
+import BusyButton from "@/app/componentes/BusyButton";
+import { MessageCallbackContext } from "@/app/layout";
+//import { schemaBloquearAutor } from "@/app/schemas/validacaoForm";
 
-export default function PerfilAtualizacao(props) {
+export default function LiberarLeitor(props) {
 
     const [modalShow, setModalShow] = useState(true);
     const [busy, setBusy] = useState(false);
     const [primeiroAcesso, setPrimeiroAcesso] = useState(null);
 
     const messageCallback = useContext(MessageCallbackContext);
-    const atualizarCallback = useContext(AtualizarPerfilContext);
+    const atualizarCallback = useContext(AtualizarLeitorContext);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
-        resolver: yupResolver(schemaAtualizaPerfil)
+        //resolver: yupResolver(schemaBloquearAutor)
     });
 
     const handleClose = () => {
@@ -31,7 +31,7 @@ export default function PerfilAtualizacao(props) {
 
         data.idusuario = props.id;
 
-        const url = '/api/UsuariosPerfil/' + props.id;
+        const url = '/api/LiberarAcesso/' + props.id;
         var args = {
             method: 'PUT',
             headers: {
@@ -65,10 +65,9 @@ export default function PerfilAtualizacao(props) {
         });
     }
 
-
     useEffect(() => {
         if (modalShow === false) {
-            reset({ email: '', dtnascimento: '' })
+            reset({ nome: '' })
         }
     }, [modalShow]);
 
@@ -76,46 +75,43 @@ export default function PerfilAtualizacao(props) {
         if (primeiroAcesso === null)
             setPrimeiroAcesso(true);
 
-        if (primeiroAcesso) {
-            setPrimeiroAcesso(false);
-            const url = '/api/Usuarios/' + props.id;
-            fetch(url).then(
-                (result) => {
-                    result.json().then((data) => {
-                        reset({ email: data.email, dtnascimento: data.dtnascimento });
-                    })
-                }
-            );
-        }
-    }, [primeiroAcesso]);
+            if (primeiroAcesso) {
+                setPrimeiroAcesso(false);
+                const url = '/api/Leitores/' + props.id;
+                fetch(url).then(
+                    (result) => {
+                        result.json().then((data) => {
+                            reset({ nome: data.nome });
+                        })
+                    }
+                );
+            }
+        }, [primeiroAcesso]);
 
     return (
         <Modal size="md" centered show={modalShow}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Modal.Header>
-                    <Modal.Title>Atualização de Perfil:</Modal.Title>
+                    <Modal.Title>Restrição de acesso:</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <label className="row mx-2">
-                        Email
-                        <input type="email" className="form-control" name="email"  {...register("email")} />
-                        <span className='text-danger'>{errors.email?.message}</span>
-                    </label>
-                    <label className="row mx-2 mt-2">
-                        Data de Nascimento
-                        <input type="date" className="form-control" maxLength={10} name="dtnascimento" {...register("dtnascimento")} />
-                        <span className='text-danger'>{errors.dtnascimento?.message}</span>
-                    </label>
+                <Modal.Body>     
+                    <div className="form-floating">
+                        Deseja LIBERAR o acesso deste leitor?
+                    </div>
                     <div className="form-floating" hidden>
                         <input type="text" className="form-control" id="nomeAutor" {...register("nome")}
                             placeholder="Nome"  name="nome" />
+                        <span className='text-danger'>{errors.nome?.message}</span>
+                        <label htmlFor="nomeAutor">Nome:</label>
+                        <input type="email" className="form-control" id="emailAutor" {...register("email")}
+                            placeholder="Email"  name="email" />
                         <input type="password" className="form-control" id="senhaAutor" {...register("senha")}
-                            placeholder="Senha "  name="senha" />
+                            placeholder="Senha"  name="senha" />
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <BusyButton variant="success" type="submit" label="Salvar" busy={busy} />
-                    <Button variant="secondary" onClick={handleClose}>Fechar</Button>
+                    <BusyButton variant="btn btn-primary mt-2 col-6 bg-black" type="submit" label="Liberar" busy={busy}/>
+                    <Button variant="secondary mt-2 col-4" onClick={handleClose}>Fechar</Button>
                 </Modal.Footer>
             </form>
         </Modal>

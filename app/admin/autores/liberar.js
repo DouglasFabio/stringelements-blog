@@ -31,7 +31,7 @@ export default function LiberarAutor(props) {
 
         data.idusuario = props.id;
 
-        const url = '/api/LiberarAutor/' + props.id;
+        const url = '/api/LiberarAcesso/' + props.id;
         var args = {
             method: 'PUT',
             headers: {

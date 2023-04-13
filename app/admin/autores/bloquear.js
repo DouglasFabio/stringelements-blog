@@ -31,7 +31,7 @@ export default function BloquearAutor(props) {
 
         data.idusuario = props.id;
 
-        const url = '/api/BloquearAutor/' + props.id;
+        const url = '/api/BloquearAcesso/' + props.id;
         var args = {
             method: 'PUT',
             headers: {
