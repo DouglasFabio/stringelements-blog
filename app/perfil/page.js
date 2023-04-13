@@ -5,6 +5,7 @@ import { useState } from "react"
 import { Alert, Button, Dropdown, Stack, Table } from "react-bootstrap"
 import PerfilAtualizacao from "./atualizarperfil"
 import { BsPencilSquare } from "react-icons/bs";
+import NavBar from "../componentes/NavBar"
 
 export const metadata = {
     title: 'Atualizar Perfil'
@@ -41,7 +42,7 @@ export default function Page() {
                             <Dropdown>
                                 <Dropdown.Toggle>Opção</Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => setOperacao({ id: p.email, action: "update" })}><BsPencilSquare/> Atualizar</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "update" })}><BsPencilSquare/> Atualizar</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </td>
@@ -64,6 +65,7 @@ export default function Page() {
 
     return (
         <>
+            <NavBar modo="semLogin"/>
             <Stack gap={2} className="col-md-5 mx-auto" >
             <p></p>
             <Alert variant="secondary"><Alert.Heading>Atualizar perfil:</Alert.Heading></Alert>

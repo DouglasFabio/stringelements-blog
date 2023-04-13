@@ -93,12 +93,12 @@ export default function PerfilAtualizacao(props) {
         <Modal size="md" centered show={modalShow}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Modal.Header>
-                    <Modal.Title>Atualização de Perfil - {props.id} </Modal.Title>
+                    <Modal.Title>Atualização de Perfil:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <label className="row mx-2">
                         Email
-                        <input type="text" className="form-control" name="email"  {...register("email")} />
+                        <input type="email" className="form-control" name="email"  {...register("email")} />
                         <span className='text-danger'>{errors.email?.message}</span>
                     </label>
                     <label className="row mx-2 mt-2">
@@ -107,9 +107,9 @@ export default function PerfilAtualizacao(props) {
                         <span className='text-danger'>{errors.dtnascimento?.message}</span>
                     </label>
                     <div className="form-floating" hidden>
-                        <input type="email" className="form-control" id="nomeAutor" {...register("nome")}
-                            placeholder="Email "  name="email" />
-                        <input type="password" className="form-control" id="emailAutor" {...register("senha")}
+                        <input type="text" className="form-control" id="nomeAutor" {...register("nome")}
+                            placeholder="Nome"  name="nome" />
+                        <input type="password" className="form-control" id="senhaAutor" {...register("senha")}
                             placeholder="Senha "  name="senha" />
                     </div>
                 </Modal.Body>
