@@ -1,3 +1,7 @@
+/*API CAMPOS NotMapped*/
+-- TbUsuario: Token, SenhaInicial
+
+------------------------------------------------------
 CREATE TABLE TB_Usuarios(
 
 -- LEGENDA StatusSenha:
