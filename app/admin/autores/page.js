@@ -4,11 +4,12 @@ import { createContext } from "react"
 import { useState } from "react"
 import { Alert, Button, Dropdown, Stack, Table } from "react-bootstrap"
 import CadastrarAutor from "./cadastrar";
-import { BsFillPersonXFill, BsPencilSquare, BsPersonAdd, BsXCircle } from "react-icons/bs";
+import { BsPencilSquare, BsPersonAdd, BsPersonFillCheck, BsPersonFillLock, BsXCircle } from "react-icons/bs";
 import AtualizarAutor from "./atualizar"
 import DeletarAutor from "./remover"
 import BloquearAutor from "./bloquear"
 import NavBar from "@/app/componentes/NavBar"
+import LiberarAutor from "./liberar"
 
 export const metadata = {
     title: 'Gerenciar Autores'
@@ -26,14 +27,17 @@ export default function Page() {
     let modalCreate = null;
     let modalUpdate = null;
     let modalDelete = null;
-    let modalBlock = null;
+    let modalLock = null;
+    let modalUnlock = null;
 
     if(operacao.action === "create"){
-        modalCreate = <CadastrarAutor/>
+      modalCreate = <CadastrarAutor/>
     }else if(operacao.action === "update"){
-        modalUpdate = <AtualizarAutor id={operacao.id}/>
-    }else if(operacao.action === "updateStatusConta"){
-        modalBlock = <BloquearAutor id={operacao.id}/>
+      modalUpdate = <AtualizarAutor id={operacao.id}/>
+    }else if(operacao.action === "lock"){
+      modalLock = <BloquearAutor id={operacao.id}/>
+    }else if(operacao.action === "unlock"){
+      modalUnlock = <LiberarAutor id={operacao.id}/>
     }else if(operacao.action === "delete"){
       modalDelete = <DeletarAutor id={operacao.id}/>
     }else{
@@ -48,19 +52,23 @@ export default function Page() {
     const pesquisar = () => {
         fetch('/api/Autores').then((result) => {
             result.json().then((data) => {
+                if(data.statusConta == "V")
+                  data.statusConta = "Verificada";
                 let i = 0;
                 let finalGrid = data.map((p) =>
                     <tr key={p.idusuario}>
                         <td><b>{i+=1}</b></td>
                         <td>{p.nome}</td>
                         <td>{p.apelidoAutor}</td>
-                        <td>{p.statusConta}</td>
+                        <td>{p.statusConta == "V"?p.statusConta="Verificada": "Não"}</td>
+                        <td>{p.statusSenha == "B"?p.statusSenha="Sim": "Não"}</td>
                         <td>
                             <Dropdown>
                                 <Dropdown.Toggle>Opção</Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "update" })}><BsPencilSquare/>  Editar Nome</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "updateStatusConta" })}><BsFillPersonXFill/>  Bloquear acesso</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "lock" })}><BsPersonFillLock/> Bloquear acesso</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "unlock" })}><BsPersonFillCheck/> Liberar acesso</Dropdown.Item>
                                     <Dropdown.Item onClick={() => setOperacao({ id: p.idusuario, action: "delete" })}><BsXCircle/>  Deletar autor</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
@@ -96,7 +104,8 @@ export default function Page() {
         <AtualizarAutorContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
           {modalUpdate}
           {modalDelete}
-          {modalBlock}
+          {modalLock}
+          {modalUnlock}
         </AtualizarAutorContext.Provider>
          
         <div>
@@ -109,6 +118,7 @@ export default function Page() {
                 <th><b>NOME</b></th>
                 <th><b>APELIDO</b></th>
                 <th><b>STATUS</b></th>
+                <th><b>BLOQUEADA?</b></th>
                 <th><b>GERENCIAR</b></th>
               </tr>
             </thead>

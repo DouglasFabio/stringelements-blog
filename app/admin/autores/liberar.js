@@ -7,7 +7,7 @@ import BusyButton from "@/app/componentes/BusyButton";
 import { MessageCallbackContext } from "@/app/layout";
 //import { schemaBloquearAutor } from "@/app/schemas/validacaoForm";
 
-export default function BloquearAutor(props) {
+export default function LiberarAutor(props) {
 
     const [modalShow, setModalShow] = useState(true);
     const [busy, setBusy] = useState(false);
@@ -31,7 +31,7 @@ export default function BloquearAutor(props) {
 
         data.idusuario = props.id;
 
-        const url = '/api/BloquearAutor/' + props.id;
+        const url = '/api/LiberarAutor/' + props.id;
         var args = {
             method: 'PUT',
             headers: {
@@ -96,7 +96,7 @@ export default function BloquearAutor(props) {
                 </Modal.Header>
                 <Modal.Body>     
                     <div className="form-floating">
-                        Deseja BLOQUEAR o acesso deste autor?
+                        Deseja LIBERAR o acesso deste autor?
                     </div>
                     <div className="form-floating" hidden>
                         <input type="text" className="form-control" id="nomeAutor" {...register("nome")}
@@ -110,7 +110,7 @@ export default function BloquearAutor(props) {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <BusyButton variant="btn btn-primary mt-2 col-6 bg-black" type="submit" label="Bloquear" busy={busy}/>
+                    <BusyButton variant="btn btn-primary mt-2 col-6 bg-black" type="submit" label="Liberar" busy={busy}/>
                     <Button variant="secondary mt-2 col-4" onClick={handleClose}>Fechar</Button>
                 </Modal.Footer>
             </form>
