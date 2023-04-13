@@ -45,20 +45,32 @@ CODAutor int,
 FOREIGN KEY (CODAutor) REFERENCES TB_Usuarios(IDUsuario)
 )
 
-CREATE TABLE TB_StatusNoticias(
+CREATE TABLE TB_Status(
 
 -- LEGENDA StatusNoticia:
--- - 0: Sem curtida
--- - 1: Gostei
--- - 2: N�o Gostei
+-- - 1: Sem curtida
+-- - 2: Gostei
+-- - 3: N�o Gostei
+
+IDStatus int primary key identity NOT NULL,
+NomeStatus varchar(50) NOT NULL,
+)
+
+INSERT INTO TB_Status
+    VALUES( 'Não há reações'),
+          ( 'Gostei'),
+          ( 'Não gostei');        
+
+CREATE TABLE TB_StatusNoticias(
 
 IDStatusNoticia int primary key identity NOT NULL,
-StatusNoticia int NOT NULL,
 Comentario varchar(max),
-DtComentario date,
+DtComentario datetime,
 CODNoticia int,
 CODLeitor int,
+CODStatus int,
 FOREIGN KEY (CODNoticia) REFERENCES TB_Noticias(IDNoticia),
-FOREIGN KEY (CODLeitor) REFERENCES TB_Usuarios(IDUsuario)
+FOREIGN KEY (CODLeitor) REFERENCES TB_Usuarios(IDUsuario),
+FOREIGN KEY (CODStatus) REFERENCES TB_Status(IDStatus)
 )
 
