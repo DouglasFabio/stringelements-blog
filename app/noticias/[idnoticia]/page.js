@@ -4,10 +4,13 @@ import Link from "next/link"
 import { Stack } from "react-bootstrap"
 
 export async function getStaticProps({params}){
+    console.log('hi');
+
     const noticia = await fetch(`http://localhost:5000/api/NoticiasPublicadas/${params.idnoticia}`)
     .then((respostaDoServer) => {
         if(respostaDoServer.ok){
-            return respostaDoServer.json();
+            const x = console.log(respostaDoServer.json());
+            return x;
         }
         throw new Error('Erro');
     })
@@ -21,6 +24,8 @@ export async function getStaticProps({params}){
 }
 
 export async function getStaticPaths(){
+    console.log('oi');
+    
     const response = await fetch('http://localhost:5000/api/NoticiasPublicadas/')
     
     const data = await response.json()
@@ -39,6 +44,7 @@ export async function getStaticPaths(){
 export default function Noticia({params}){
 
     return (
+
         <>
             <NavBar modo="semLogin"/>
                 <Stack gap={2} className="col-md-5 mx-auto">

@@ -12,12 +12,17 @@ export async function getStaticProps(context){
 
     const noticia = await data.json()
 
+        console.log('hi2');
+        console.log(noticia);
+
     return {
         props: { noticia },
     }
 }
 
 export async function getStaticPaths(){
+    
+    console.log('oi2');
     
     const response = await fetch('http://localhost:5000/api/NoticiasPublicadas/')
     

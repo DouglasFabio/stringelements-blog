@@ -6,6 +6,7 @@ import { Alert, Button, Dropdown, Stack, Table } from "react-bootstrap";
 import { BsFileEarmarkCheck, BsFillFileTextFill, BsPencilSquare, BsXCircle } from "react-icons/bs";
 import AtualizarNoticia from "./atualizar";
 import CadastrarNoticia from "./cadastrar";
+import PublicarNoticia from "./publicar";
 import DeletarNoticia from "./remover";
 
 export const metadata = {
@@ -14,6 +15,7 @@ export const metadata = {
 
 export const CadastrarNoticiaContext = createContext(null);
 export const AtualizarNoticiaContext = createContext(null);
+
 
 export default function Page() {
 
@@ -24,11 +26,14 @@ export default function Page() {
     let modalCreate = null;
     let modalUpdate = null;
     let modalDelete = null;
+    let modalUpdateSituacao = null;
 
     if(operacao.action === "create"){
         modalCreate = <CadastrarNoticia/>
     }else if(operacao.action === "update"){
         modalUpdate = <AtualizarNoticia id={operacao.id}/>
+    }else if(operacao.action === "updateSituacao"){
+      modalUpdateSituacao = <PublicarNoticia id={operacao.id}/>
     }else if(operacao.action === "delete"){
       modalDelete = <DeletarNoticia id={operacao.id}/>
     }else{
@@ -74,6 +79,7 @@ export default function Page() {
             modalCreate = null;
             modalUpdate = null;
             modalDelete = null;
+            modalUpdateSituacao = null;
         if (atualizarGrid) {
             setAtualizarGrid(false);
             pesquisar();  
@@ -90,6 +96,7 @@ export default function Page() {
         </CadastrarNoticiaContext.Provider>
         <AtualizarNoticiaContext.Provider value={{atualizar: setAtualizarGrid, fechar: fecharModals}}>
           {modalUpdate}
+          {modalUpdateSituacao}
           {modalDelete}
         </AtualizarNoticiaContext.Provider>
          

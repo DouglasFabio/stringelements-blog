@@ -116,8 +116,6 @@ export const schemaNoticia = yup.object({
     .min(5, 'O conteúdo deve conter, no mínimo, 5 caracteres')
     .max(500, 'O conteúdo deve conter, no máximo, 500 caracteres')
     .required('O conteúdo é obrigatório'),
-  situacao: yup.string()
-    .required('A situação é obrigatória')
 }).required();
 
 export const schemaVerificaLeitor = yup.object({
