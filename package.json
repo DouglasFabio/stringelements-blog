@@ -27,6 +27,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.7",
     "react-icons": "^4.8.0",
+    "server-only": "^0.0.1",
     "styled-components": "^5.3.8",
     "sweetalert2": "^11.4.8",
     "sweetalert2-react-content": "^5.0.7",

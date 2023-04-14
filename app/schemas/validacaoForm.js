@@ -157,3 +157,9 @@ export const schemaBloquearAutor = yup.object({
           'um número e um caracter especial'
   )
 }).required();
+
+export const schemaComentario = yup.object({
+  comentario: yup.string()
+      .min(5, 'O comentário deve conter, no mínimo, 5 caracteres')
+      .max(100, 'O comentário deve conter, no máximo, 100 caracteres')
+}).required();
