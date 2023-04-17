@@ -37,13 +37,13 @@ export default function Page() {
             result.json().then((data) => {
                 let i = 0;
                 let finalGrid = data.map((p) =>
-                    <tr key={p.idstatusnoticia}>
+                    <tr key={p.idstatusNoticia}>
                         <td><b>{i+=1}</b></td>
                         <td>{p.comentario}</td>
                         <td>{p.codleitor}</td>
                         
                         <td>
-                            <Button onClick={() => setOperacao({ id: p.idusuario, action: "delete" })} variant="danger" title="DELETAR"><BsXCircleFill size={20}/></Button>
+                            <Button onClick={() => setOperacao({ id: p.idstatusNoticia, action: "delete" })} variant="danger" title="DELETAR"><BsXCircleFill size={20}/></Button>
                         </td>
                     </tr>
                 );

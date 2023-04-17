@@ -21,7 +21,7 @@ export default function DeletarComentario(props) {
     }
 
     const onSubmit = () => {
-
+        
         setBusy(true);
         const url = '/api/Comentarios/' + props.id;
         var args = {
