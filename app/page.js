@@ -33,7 +33,7 @@ export default function Noticias() {
                 let finalGrid = data.map((p) =>
                     <div className="container-md" key={p.idnoticia}>
                         <hr/>
-                        <h3><p className="text-bold">{p.dataPublicacao}</p><Link href={`/noticias/${p.idnoticia}`} legacyBehavior>{p.titulo}</Link><Badge bg="secondary">New</Badge></h3>
+                        <h3><p className="text-bold">{p.dataPublicacao}</p><Link href={`/${p.idnoticia}`} legacyBehavior>{p.titulo}</Link><Badge bg="secondary">New</Badge></h3>
                         <h5>{p.subtitulo}</h5>      
                     </div>
                 );

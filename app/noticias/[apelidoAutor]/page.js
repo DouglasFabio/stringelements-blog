@@ -5,12 +5,12 @@ import { MessageCallbackContext } from "@/app/layout";
 import { schemaComentario } from "@/app/schemas/validacaoForm";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link"
-import { useContext, useState } from "react";
-import { Badge, Button, Stack } from "react-bootstrap"
+import { useContext, useEffect, useState } from "react";
+import { Alert, Badge, Button, Stack } from "react-bootstrap"
 import { useForm } from "react-hook-form";
 import { BsHandThumbsDown, BsHandThumbsUp } from "react-icons/bs";
 
-export default function Noticia(){
+export default function Noticia(props){
 
     const [busy, setBusy] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
@@ -19,6 +19,9 @@ export default function Noticia(){
 
     const messageCallback = useContext(MessageCallbackContext);
     const [operacao, setOperacao] = useState({ id: null, action: null });
+    const [gridNoticiaID, setGridNoticiaID] = useState(null);
+    const [atualizarGrid, setAtualizarGrid] = useState(null);
+    const [primeiroAcesso, setPrimeiroAcesso] = useState(null);
 
     if(operacao.action === "positivo"){
         
@@ -72,6 +75,54 @@ export default function Noticia(){
         
     }
 
+    const pesquisar = () => {
+
+
+        fetch('/api/NoticiasPublicadas/10').then((result) => {
+            result.json().then((data) => {
+                let finalGrid = 
+                    <div className="container-md" key={data.idnoticia}>
+                        <Alert variant="secondary"><Alert.Heading>Notícias do Autor: {data.codautor}</Alert.Heading></Alert>
+                        <h1>{data.titulo}</h1>
+                        <h2>{data.subtitulo}</h2>
+                        <h3>{data.datapublicacao}</h3>
+                        <h4>{data.codautor}</h4>
+                        <h5>{data.texto}</h5>     
+                    </div>
+                
+                setGridNoticiaID(finalGrid);
+            })
+        }
+        );
+    }
+
+    useEffect(() => {
+        if (atualizarGrid === null)
+            setAtualizarGrid(true);
+        if (atualizarGrid) {
+            setAtualizarGrid(false);
+            pesquisar();  
+        }
+    }, [atualizarGrid])
+
+    useEffect(() => {
+        if (primeiroAcesso === null)
+            setPrimeiroAcesso(true);
+
+            if (primeiroAcesso) {
+                setPrimeiroAcesso(false);
+                const url = '/api/NoticiasPublicadas/';
+                fetch(url).then(
+                    (result) => {
+                        result.json().then((data) => {
+                            reset({ titulo: data.titulo });
+                        })
+                    }
+                );
+            }
+        }, [primeiroAcesso]);
+
+
     return (
 
         <>
@@ -80,11 +131,7 @@ export default function Noticia(){
                     <p></p>
                     
                     <Link href="/" passHref legacyBehavior>Voltar</Link>
-                    <h1>TITULO</h1>
-                    <h2>SUBTITULO</h2>
-                    <h3>Data Publicação</h3>
-                    <h4>Nome Autor</h4>
-                    <h5>CONTEÚDO DA NOTÍCIA</h5>
+                    {gridNoticiaID}
                     <hr/>
                     <div>
                         <Button variant="success" onClick={() => setOperacao({id: 2, action: "positivo" })} 
