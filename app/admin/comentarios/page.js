@@ -38,7 +38,7 @@ export default function Page() {
                 let i = 0;
                 let finalGrid = data.map((p) =>
                     <tr key={p.idstatusNoticia}>
-                        <td><b>{i+=1}{p.idstatusNoticia}</b></td>
+                        <td><b>{i+=1}</b></td>
                         <td>{p.comentario}</td>
                         <td>{p.codleitor}</td>
                         
