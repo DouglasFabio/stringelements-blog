@@ -17,47 +17,47 @@ export default function CadastroAdmin() {
       resolver: yupResolver(schemaAdmin)
   });
 
-  const onSubmit = (data) => {
-      setBusy(true);
-      
-      const url = '/api/Usuarios';
+    const onSubmit = (data) => {
+        setBusy(true);
+        
+        const url = '/api/Usuarios';
 
-      var args = {
-          method: 'POST',
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-      };
-      
-      fetch(url, args).then((result) => {
-          setBusy(false);
-          result.json().then((resultData) => {
-              if (result.status == 200) {
-                  //ações em caso de sucesso
-                  messageCallback({ tipo: 'sucesso', texto: resultData });
-                  reset();
-              }
-              else {
-                  //ações em caso de erro
-                  let errorMessage = '';
-                  if (resultData.errors != null) {
-                      const totalErros = Object.keys(resultData.errors).length;
+        var args = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+        
+        fetch(url, args).then((result) => {
+            setBusy(false);
+            result.json().then((resultData) => {
+                if (result.status == 200) {
+                    //ações em caso de sucesso
+                    messageCallback({ tipo: 'sucesso', texto: resultData });
+                    reset();
+                }
+                else {
+                    //ações em caso de erro
+                    let errorMessage = '';
+                    if (resultData.errors != null) {
+                        const totalErros = Object.keys(resultData.errors).length;
 
-                      for (var i = 0; i < totalErros; i++) {
-                          errorMessage = errorMessage + Object.values(resultData.errors)[i] + "<br/>";
-                      }
-                  }
-                  else
-                      errorMessage = resultData;
+                        for (var i = 0; i < totalErros; i++) {
+                            errorMessage = errorMessage + Object.values(resultData.errors)[i] + "<br/>";
+                        }
+                    }
+                    else
+                        errorMessage = resultData;
 
-                  messageCallback({ tipo: 'erro', texto: errorMessage });
-              }
-          })
-      });
-      
-  }
+                    messageCallback({ tipo: 'erro', texto: errorMessage });
+                }
+            })
+        });
+        
+    }
 
   return (
       <Stack gap={2} className="col-md-5 mx-auto" >
