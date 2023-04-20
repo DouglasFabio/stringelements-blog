@@ -19,6 +19,18 @@ const [busy, setBusy] = useState(false);
       resolver: yupResolver(schemaLogin)
   });
 
+  const verificaConta = () => {
+    fetch('/api/Usuarios').then((result) => {
+        result.json().then((data) => {
+            if(data.statusConta == "V")
+                window.location = 'http://localhost:3000/';
+            else
+                window.location = 'http://localhost:3000/leitores/verificacao';
+        })
+    });
+        
+  }
+
     const onSubmit = (data) => {
         setBusy(true);
         
@@ -38,8 +50,8 @@ const [busy, setBusy] = useState(false);
             result.json().then((resultData) => {
                 if (result.status == 200) {
                     //ações em caso de sucesso
+                    verificaConta();
                     messageCallback({ tipo: 'sucesso', texto: resultData });
-                    window.location = 'http://localhost:3000/';
                     reset();
                 }
                 else {

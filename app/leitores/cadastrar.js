@@ -38,6 +38,7 @@ export default function CadastrarLeitor(){
                   //ações em caso de sucesso
                   messageCallback({ tipo: 'sucesso', texto: resultData });
                   reset();
+                  window.location = 'http://localhost:3000/leitores/verificacao'
                   //handler(res.redirect(307, '/leitores/verificacao'));                 
               }
               else {

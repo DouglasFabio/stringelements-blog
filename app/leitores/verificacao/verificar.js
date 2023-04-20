@@ -67,8 +67,8 @@ export default function VerificarContaLeitor() {
         </div>
         <div className="form-floating" hidden>
             <input type="text" className="form-control" id="nome" name="nome" {...register("nome")} />
-            <input type="text" className="form-control" id="nome" name="email"{...register("email")} />
-            <input type="password" className="form-control" id="nome" name="senha" {...register("senha")}/>
+            <input type="text" className="form-control" id="email" name="email"{...register("email")} />
+            <input type="password" className="form-control" id="senha" name="senha" {...register("senha")}/>
         </div>
         <BusyButton variant="btn btn-primary mt-2 col-12 bg-black" type="submit" label="Verificar" busy={busy}/>
       </form>
