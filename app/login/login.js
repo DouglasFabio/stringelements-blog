@@ -33,7 +33,8 @@ const [busy, setBusy] = useState(false);
 
     const onSubmit = (data) => {
         setBusy(true);
-        
+        data.nome = 'none';
+
         const url = '/api/Autenticar';
   
         var args = {
@@ -50,9 +51,10 @@ const [busy, setBusy] = useState(false);
             result.json().then((resultData) => {
                 if (result.status == 200) {
                     //ações em caso de sucesso
-                    verificaConta();
+                    //verificaConta();
                     messageCallback({ tipo: 'sucesso', texto: resultData });
                     reset();
+                    window.location= 'http://localhost:3000';
                 }
                 else {
                     //ações em caso de erro
@@ -92,11 +94,6 @@ const [busy, setBusy] = useState(false);
                 placeholder="Senha" name="senha" />
             <span className='text-danger'>{errors.senha?.message}</span>
             <label htmlFor="senha">Senha:</label>
-        </div>
-        <div className="form-floating mt-1" hidden>
-            <input type="text" className="form-control" id="nome" {...register("nome")}
-                placeholder="Nome"  name="nome" value="Nome" />
-            <label htmlFor="nome">Nome:</label>
         </div>
           <BusyButton variant="btn btn-primary mt-3 col-12 bg-black" type="submit" label="ENTRAR" busy={busy}/>
         <Link href="/resetar" passHref legacyBehavior>Esqueceu sua senha?</Link>
